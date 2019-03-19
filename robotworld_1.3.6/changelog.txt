@@ -1,0 +1,15 @@
+---------------------------------------------------------------------------------------------------
+Version: 1.3.6
+  Bugfixes:
+    - Added dependency to omnimatter_science to fix recipe issues.
+---------------------------------------------------------------------------------------------------
+Version: 1.3.5
+  Bugfixes:
+    - Fixed an issue that prevented passive provider and storage chests from being unlocked whenever non-logistic-network early robot settings were enabled.
+    - Fixed robot health not being affected when robot health settings are adjusted.
+  Changes:
+    - Cleaned up mod description.
+    - Added support for Recursive Blueprints.
+    - Cleaned up robotics tech tree to be more logical.
+    - Cleaned up English localisation.
+    - Added proper changelog.
