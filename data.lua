@@ -65,11 +65,21 @@ end
 -- Changes cost of recipes
 
 if (settings.startup["enable-early-logistic-robots"].value) then
-data.raw["recipe"]["logistic-robot"].ingredients = 
+data.raw["recipe"]["construction-robot"].ingredients = 
 {
     {"iron-plate", 1},
     {"iron-gear-wheel", 1},
     {"electronic-circuit", 1},
+}
+data.raw["recipe"]["logistic-chest-passive-provider"].ingredients = 
+{
+                  {"iron-plate", 3},
+                  {"electronic-circuit", 1},
+}
+data.raw["recipe"]["logistic-chest-storage"].ingredients = 
+{
+                  {"iron-plate", 3},
+                  {"electronic-circuit", 1},
 }
 end
 
@@ -79,6 +89,16 @@ data.raw["recipe"]["construction-robot"].ingredients =
     {"iron-plate", 1},
     {"iron-gear-wheel", 1},
     {"electronic-circuit", 1},
+}
+data.raw["recipe"]["logistic-chest-passive-provider"].ingredients = 
+{
+                  {"iron-plate", 3},
+                  {"electronic-circuit", 1},
+}
+data.raw["recipe"]["logistic-chest-storage"].ingredients = 
+{
+                  {"iron-plate", 3},
+                  {"electronic-circuit", 1},
 }
 end
 if (settings.startup["enable-early-logistic-system"].value) then
