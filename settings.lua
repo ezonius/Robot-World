@@ -9,19 +9,19 @@ data:extend({
     type = "double-setting",
     name = "robot-speed-multiplier",
     setting_type = "startup",
-    default_value = 1,
+    default_value = 5,
   },
   {
     type = "double-setting",
     name = "robot-battery-size-multiplier",
     setting_type = "startup",
-    default_value = 1,
+    default_value = 0.5,
   },
   {
     type = "double-setting",
     name = "robot-energy-usage-multiplier",
     setting_type = "startup",
-    default_value = 1,
+    default_value = 0.2,
   },
   {
     type = "double-setting",
