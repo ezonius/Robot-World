@@ -2290,7 +2290,7 @@ local item = {
 local recipe = {
   type = "recipe",
   name = "logistic-cargo-wagon",
-  enabled = true,
+  enabled = false,
   ingredients = {
     {"cargo-wagon", 1},
     {"logistic-chest-requester", 1},
