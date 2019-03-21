@@ -41,40 +41,4 @@ data:extend({
     setting_type = "startup",
     default_value = 1
   },
-  {
-    type = "double-setting",
-    name = "robot-stack-size",
-    setting_type = "startup",
-    default_value = 50
-  },
-  {
-    type = "double-setting",
-    name = "robot-health-multiplier",
-    setting_type = "startup",
-    default_value = 1
-  },
-  {
-    type = "bool-setting",
-    name = "enable-early-construction-robots",
-    setting_type = "startup",
-    default_value = true
-  },
-  {
-    type = "bool-setting",
-    name = "enable-early-logistic-robots",
-    setting_type = "startup",
-    default_value = true
-  },
-  {
-    type = "bool-setting",
-    name = "enable-early-logistic-system",
-    setting_type = "startup",
-    default_value = true
-  },
-  {
-    type = "double-setting",
-    name = "inserter-speed-multiplier",
-    setting_type = "startup",
-    default_value = 1
-  },
 })
