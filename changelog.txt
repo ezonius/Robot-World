@@ -5,6 +5,8 @@ Version: 1.3.7
   Changes:
     - Moved all data into a single data.lua file.
     - Added dynamic modification of recipes and technologies.
+    - Removed optional dependency to MoreSciencePacks.
+    - Changed omnimatter_science dependency to omnilibrary.
     ---------------------------------------------------------------------------------------------------
 Version: 1.3.6
   Bugfixes:
