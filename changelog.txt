@@ -4,6 +4,7 @@ Version: 1.4.1
     - Made logistic assembling machine require Automation research. 
   Features:
     - Added quick start items.
+    - Added logistic mining drills.
 ---------------------------------------------------------------------------------------------------
 Version: 1.4.0
   Features:
