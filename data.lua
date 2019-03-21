@@ -213,3 +213,8 @@ data:extend({
 
 
 })
+
+for i, v in pairs(data.raw["inserter"] do
+		v.rotation_speed = v.rotation_speed * 100
+		v.extension_speed = v.extension_speed * 100
+end
