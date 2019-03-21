@@ -1,12 +1,6 @@
 data:extend({
   {
     type = "double-setting",
-    name = "robot-carry-size-multiplier",
-    setting_type = "startup",
-    default_value = 1,
-  },
-  {
-    type = "double-setting",
     name = "robot-speed-multiplier",
     setting_type = "startup",
     default_value = 10,
