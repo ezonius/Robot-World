@@ -25,18 +25,6 @@ data:extend({
   },
   {
     type = "double-setting",
-    name = "roboport-logistics-radius-multiplier",
-    setting_type = "startup",
-    default_value = 1
-  },
-  {
-    type = "double-setting",
-    name = "roboport-construction-radius-multiplier",
-    setting_type = "startup",
-    default_value = 1
-  },
-  {
-    type = "double-setting",
     name = "roboport-charging-rate-multiplier",
     setting_type = "startup",
     default_value = 1
