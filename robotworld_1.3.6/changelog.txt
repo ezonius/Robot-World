@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.3.7
+  Features:
+    - Added support for Logistic Cargo Wagon, Logistic Mining Drill, and Logistic Assembling Machine. You can now use these new items earlier.
+  Changes:
+    - Moved all data into a single data.lua file.
+    - Added dynamic modification of recipes and technologies.
+    ---------------------------------------------------------------------------------------------------
 Version: 1.3.6
   Bugfixes:
     - Added dependency to omnimatter_science to fix recipe issues.
