@@ -688,7 +688,7 @@ data:extend(
   {
     type = "recipe",
     name = "logistic-assembling-machine",
-    enabled = true,
+    enabled = false,
     ingredients =
     {
       {"assembling-machine-1", 2},
@@ -740,4 +740,6 @@ data:extend(
 
   })
 
+
 table.insert(data.raw["technology"]["railway"].effects, {type = "unlock-recipe", recipe = "logistic-cargo-wagon"})
+table.insert(data.raw["technology"]["automation"].effects, {type = "unlock-recipe", recipe = "logistic-assembling-machine"})
