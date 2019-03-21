@@ -65,7 +65,7 @@ end
 -- Changes cost of recipes
 
 if (settings.startup["enable-early-logistic-robots"].value) then
-data.raw["recipe"]["construction-robot"].ingredients = 
+data.raw["recipe"]["logistic-robot"].ingredients = 
 {
     {"iron-plate", 1},
     {"iron-gear-wheel", 1},
