@@ -1,4 +1,8 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.4.0
+  Features:
+    - Added logistic cargo wagons, drills, and assembling machines.
+---------------------------------------------------------------------------------------------------
 Version: 1.3.7
   Features:
     - Added support for Logistic Assembling Machine and requested support for Logistic Cargo Wagon. You can now use these new items earlier.
