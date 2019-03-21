@@ -7,5 +7,5 @@
   "homepage": "",
   "factorio_version": "0.17",
   "dependencies": [ "base >= 0.17", "? boblibrary", "? omnilibrary"],
-  "description": "A highly-configurable mod that can modify many aspects of how robots work.  Full customization of how robots and roboports perform (speed, carry size, and more). Allows robots to be used at the start of the game (optional). Adds logistic versions of assembling machines, cargo wagons, and drills. And more!"
+  "description": "Full customization of how robots and roboports perform (speed, carry size, and more). Allows robots to be used at the start of the game. Adds logistic versions of assembling machines and cargo wagons. And more!"
 }
