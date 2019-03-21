@@ -40,10 +40,11 @@ for i, v in pairs(data.raw["technology"]["logistic-robotics"]["effects"]) do
 data.raw["recipe"][v.recipe].enabled = true
 end
 end
-if (settings.startup["enable-early-construction-robots"].value) then
-for i, v in pairs(data.raw["technology"]["construction-robotics"]["effects"]) do
-data.raw["recipe"][v.recipe].enabled = true
-end
+if (settings.startup["enable-early-construction-robots"].value) then -- Using "for" doesn't work here, unfortunately
+data.raw["recipe"]["roboport"].enabled = true
+data.raw["recipe"]["construction-robot"].enabled = true
+data.raw["recipe"]["logistic-chest-passive-provider"].enabled = true
+data.raw["recipe"]["logistic-chest-storage"].enabled = true
 end
 if mods["recursive-blueprints"] then
 data.raw["recipe"]["blueprint-deployer"].enabled = true
