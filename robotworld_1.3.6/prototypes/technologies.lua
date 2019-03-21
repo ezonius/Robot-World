@@ -2,18 +2,6 @@ if (settings.startup["enable-early-construction-robots"].value or settings.start
 data.raw.technology["worker-robots-storage-1"].prerequisites = {"early-worker-robots-storage"}
 data.raw.technology["worker-robots-speed-1"].prerequisites = {"early-worker-robots-speed"}
 
-if (mods["boblogistics"]) then
-data.raw.technology["bob-robo-modular-1"].unit =
-    {
-      count = 20,
-      ingredients =
-      {
-        {"automation-science-pack", 1},
-      },
-      time = 15
-    }
-end
-
 data:extend({
 {
     type = "technology",
