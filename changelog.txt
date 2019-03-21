@@ -1,16 +1,15 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.4.1
   Changes:
-    - Made logistic assembling machine require Automation research. 
-  Features:
     - Added quick start items.
+    - Removed new logistic items for now.
 ---------------------------------------------------------------------------------------------------
 Version: 1.4.0
-  Features:
+  Changes:
     - Added logistic cargo wagons and assembling machines.
 ---------------------------------------------------------------------------------------------------
 Version: 1.3.7
-  Features:
+  Changes:
     - Added support for Logistic Assembling Machine and requested support for Logistic Cargo Wagon. You can now use these new items earlier.
   Changes:
     - Moved all data into a single data.lua file.
