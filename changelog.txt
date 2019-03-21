@@ -1,4 +1,8 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.4.1
+  Changes:
+    - Made logistic assembling machine require Automation research. 
+---------------------------------------------------------------------------------------------------
 Version: 1.4.0
   Features:
     - Added logistic cargo wagons, drills, and assembling machines.
