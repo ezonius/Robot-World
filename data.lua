@@ -119,25 +119,6 @@ if mods["bobelectronics"] then
       end
 end
 
--- Support for LogisticMine, enabling early logistic mining drills
-
-if mods["LogisticMine"] then
-      for i, v in pairs(data.raw["technology"]["logistic-mining-drill"]["effects"]) do
-            data.raw["recipe"][v.recipe].enabled = true
-      end
-      data.raw["technology"]["logistic-mining-drill"].enabled = false -- Disabled as the tech is no longer necessary
-      data.raw["recipe"]["logistic-mining-drill"].ingredients = 
-      {
-            {"electric-mining-drill", 1},
-            {"logistic-chest-active-provider"}
-      }
-      data.raw["recipe"]["logistic-mining-drill-2"].ingredients = 
-      {
-            {"electric-mining-drill", 1},
-            {"logistic-chest-passive-provider"}
-      }
-end
-
 -- Support for LogisticAssemblingMachine, enabling early logistic assembling machines
 
 if mods["LogisticAssemblingMachine"] then
