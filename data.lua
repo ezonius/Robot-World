@@ -125,7 +125,7 @@ if mods["LogisticMine"] then
       for i, v in pairs(data.raw["technology"]["logistic-mining-drill"]["effects"]) do
             data.raw["recipe"][v.recipe].enabled = true
       end
-      data.raw["technology"]["logistic-mining-drill"].hidden = true -- Hiding as the tech is no longer necessary
+      data.raw["technology"]["logistic-mining-drill"].enabled = false -- Disabled as the tech is no longer necessary
       data.raw["recipe"]["logistic-mining-drill"].ingredients = 
       {
             {"electric-mining-drill", 1},
@@ -144,7 +144,7 @@ if mods["LogisticAssemblingMachine"] then
       for i, v in pairs(data.raw["technology"]["logistic-assembling-machine"]["effects"]) do
             data.raw["recipe"][v.recipe].enabled = true
       end
-      data.raw["technology"]["logistic-assembling-machine"].hidden = true -- Hiding as the tech is no longer necessary
+      data.raw["technology"]["logistic-assembling-machine"].enabled = false -- Disabled as the tech is no longer necessary
       data.raw["recipe"]["logistic-assembling-machine"].ingredients = 
       {
             {"assembling-machine-1", 2},
@@ -152,13 +152,6 @@ if mods["LogisticAssemblingMachine"] then
             {"logistic-chest-passive-provider", 1},
             {"logistic-chest-requester", 1},
       }
-end
-
--- Support for LogisticCargoWagon, enabling early logistic cargo wagons
-
-if mods["logistic-cargo-wagon"] then
-      table.insert(data.raw["technology"]["railway"].effects,  {type = "unlock-recipe", recipe = "logistic-cargo-wagon"})
-      data.raw["technology"]["logistic-cargo-wagon"].hidden = true
 end
 
 -- Adds some new technologies if early robot settings are enabled
