@@ -1,4 +1,5 @@
 script.on_event(defines.events.on_player_created, function(event)
+		if settings.startup["enable-quick-start"].value then
 	local player = game.players[event.player_index]
 		player.insert{name="inserter", count=200}
 		player.insert{name="small-electric-pole", count=200}
@@ -17,4 +18,5 @@ script.on_event(defines.events.on_player_created, function(event)
 		player.insert{name="logistic-robot", count=200}
 		player.insert{name="construction-robot", count=50}
 		player.insert{name="roboport", count=10}
+			end
 	end)
