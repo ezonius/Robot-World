@@ -229,10 +229,3 @@ data:extend({
 
 
 })
-
--- Speeds up inserters.
-
-for i, v in pairs(data.raw["inserter"]) do
-		v.rotation_speed = v.rotation_speed * 10
-		v.extension_speed = v.extension_speed * 10
-end
