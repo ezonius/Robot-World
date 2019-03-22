@@ -77,24 +77,41 @@ data.raw["recipe"]["roboport"].ingredients =
 -- Makes electronic-circuits into basic-circuit-boards if bobelectronics is enabled
 
 if mods["bobelectronics"] then
+data.raw["recipe"]["logistic-robot"].ingredients = 
+{
+    {"iron-plate", 1},
+    {"iron-gear-wheel", 1},
+    {"basic-circuit-board", 1},
+}           
+data.raw["recipe"]["construction-robot"].ingredients = 
+{
+    {"iron-plate", 1},
+    {"iron-gear-wheel", 1},
+    {"basic-circuit-board", 1},
+}
+data.raw["recipe"]["logistic-chest-passive-provider"].ingredients = 
+{
+                  {"iron-plate", 3},
+                  {"basic-circuit-board", 1},
+}
+data.raw["recipe"]["logistic-chest-storage"].ingredients = 
+{
+                  {"iron-plate", 3},
+                  {"basic-circuit-board", 1},
+}
       for i, v in pairs(data.raw["technology"]["logistic-system"]["effects"]) do
-            if data.raw["recipe"][v.recipe]["ingredients"].name == "electronic-circuit" then
-                  data.raw["recipe"][v.recipe]["ingredients"].name = "basic-circuit-board"
-            end
+            data.raw["recipe"][v.recipe].ingredients = 
+            {
+                  {"iron-plate", 3},
+                  {"basic-circuit-board", 1},
+            }
       end
-      for i, v in pairs(data.raw["technology"]["logistic-robotics"]["effects"]) do
-            if data.raw["recipe"][v.recipe]["ingredients"].name == "electronic-circuit" then
-                  data.raw["recipe"][v.recipe]["ingredients"].name = "basic-circuit-board"
-            end
-      end
-      data.raw["recipe"]["construction-robot"].ingredients = 
-	{
-		{"iron-plate", 1},
-		{"iron-gear-wheel", 1},
-		{"basic-circuit-board", 1}
-	}
-		
-		
+data.raw["recipe"]["roboport"].ingredients = 
+{
+  {"iron-plate", 25},
+  {"iron-gear-wheel", 10},
+  {"basic-circuit-board", 10}
+}
 end
 
 -- Adds some new technologies
