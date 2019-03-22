@@ -3,9 +3,6 @@
   "version": "1.4.3",
   "title": "Robot World",
   "author": "GamingComet",
-  "contact": "",
-  "homepage": "",
   "factorio_version": "0.17",
-  "dependencies": [ "base >= 0.17", "? bobelectronics", "? boblogistics", "? omnimatter_fluid"],
-  "description": "Overhauls the in-game robots to make them a useful part of your factory. Allows robots, logistic chests, and roboports to be used early. Allows you to customize charge rate, battery, speed, and power usage. Gives you some early-game items to make it easier to start your factory. And more!"
+  "description": "Ability to customize the performance of your robots, such as speed, range, battery size, and more. Setting to use robots early. Setting to enable quick start mode. New robotics technologies. And more!"
 }
