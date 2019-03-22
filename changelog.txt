@@ -5,6 +5,10 @@ Version: 1.4.3
     - Fixed certain settings not showing up in the mod settings menu.
     - Allowed inserter speed to be configured.
     - Added toggleable quick start option.
+    - Cleaned up info.json.
+  Bugfixes:
+    - Reverted data-final-fixes to data.
+    - Removed all dependencies.
 ---------------------------------------------------------------------------------------------------
 Version: 1.4.2
   Bugfixes:
