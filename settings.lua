@@ -57,19 +57,25 @@ data:extend({
     type = "bool-setting",
     name = "enable-early-construction-robots",
     setting_type = "startup",
-    default_value = true
+    default_value = false
   },
   {
     type = "bool-setting",
     name = "enable-early-logistic-robots",
     setting_type = "startup",
-    default_value = true
+    default_value = false
   },
   {
     type = "bool-setting",
     name = "enable-early-logistic-system",
     setting_type = "startup",
-    default_value = true
+    default_value = false
+  },
+  {
+    type = "bool-setting",
+    name = "enable-quick-start",
+    setting_type = "startup",
+    default_value = false
   },
   {
     type = "double-setting",
