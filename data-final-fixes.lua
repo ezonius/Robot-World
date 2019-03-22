@@ -32,7 +32,7 @@ end
 
 if settings.startup["enable-early-logistic-robots"].value then
 	for i, v in pairs(data.raw["technology"]["logistic-robotics"]["effects"]) do
-		ata.raw["recipe"][v.recipe].enabled = true
+		data.raw["recipe"][v.recipe].enabled = true
 	end
 end
 if settings.startup["enable-early-construction-robots"].value then
