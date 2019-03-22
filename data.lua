@@ -87,11 +87,14 @@ if mods["bobelectronics"] then
                   data.raw["recipe"][v.recipe]["ingredients"].name = "basic-circuit-board"
             end
       end
-      for i, v in pairs(data.raw["technology"]["construction-robotics"]["effects"]) do
-            if data.raw["recipe"][v.recipe]["ingredients"].name == "electronic-circuit" then
-                  data.raw["recipe"][v.recipe]["ingredients"].name = "basic-circuit-board"
-            end
-      end
+      data.raw["recipe"]["construction-robot"].ingredients = 
+	{
+		{"iron-plate", 1},
+		{"iron-gear-wheel", 1},
+		{"basic-circuit-board", 1}
+	}
+		
+		
 end
 
 -- Adds some new technologies
