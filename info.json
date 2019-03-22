@@ -1,11 +1,11 @@
 {
   "name": "robotworld",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "title": "Robot World",
   "author": "GamingComet",
   "contact": "",
   "homepage": "",
   "factorio_version": "0.17",
-  "dependencies": [ "base >= 0.17", "? boblibrary", "? omnilibrary", "angelsrefining"],
-  "description": "Full customization of how robots and roboports perform (speed, carry size, and more). Allows robots to be used at the start of the game. And more!"
+  "dependencies": [ "base >= 0.17", "? boblibrary", "? omnilibrary"],
+  "description": "Overhauls the in-game robots to make them a useful part of your factory. Allows robots, logistic chests, and roboports to be used early. Allows you to customize charge rate, battery, speed, and power usage. Gives you some early-game items to make it easier to start your factory. And more!"
 }
