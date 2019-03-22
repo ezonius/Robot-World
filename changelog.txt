@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.4.3
+  Changes:
+    - Removed dependency to angelsrefinng.
+    - Fixed certain settings not showing up in the mod settings menu.
+    - Allowed inserter speed to be configured.
+---------------------------------------------------------------------------------------------------
 Version: 1.4.2
   Bugfixes:
     - Attempted to fix an incompatibility with bobelectronics.
