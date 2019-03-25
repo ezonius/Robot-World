@@ -1,4 +1,8 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.4.5
+  Changes:
+    - Added optional dependency to bobelectronics.
+---------------------------------------------------------------------------------------------------
 Version: 1.4.4
   Changes:
     - Added optional dependency to boblogistics.
