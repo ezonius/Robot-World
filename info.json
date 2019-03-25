@@ -1,9 +1,9 @@
 {
   "name": "robotworld",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "title": "Robot World",
   "author": "GamingComet",
   "factorio_version": "0.17",
-  "dependencies": ["? boblogistics"],
+  "dependencies": ["? boblogistics", "? bobelectronics"],
   "description": "Ability to customize the performance of your robots, such as speed, range, battery size, and more. Setting to use robots early. Setting to enable quick start mode. New robotics technologies. And more!"
 }
