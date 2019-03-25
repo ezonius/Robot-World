@@ -14,7 +14,6 @@ Version: 1.4.3
     - Allowed inserter speed to be configured.
     - Added toggleable quick start option.
     - Cleaned up info.json.
-  Bugfixes:
     - Reverted data-final-fixes to data.
     - Removed all dependencies.
 ---------------------------------------------------------------------------------------------------
@@ -35,7 +34,6 @@ Version: 1.4.0
 Version: 1.3.7
   Changes:
     - Added support for Logistic Assembling Machine and requested support for Logistic Cargo Wagon. You can now use these new items earlier.
-  Changes:
     - Moved all data into a single data.lua file.
     - Added dynamic modification of recipes and technologies.
     - Removed optional dependency to MoreSciencePacks.
