@@ -21,7 +21,8 @@ data.raw["roboport"]["roboport"].energy_usage = "0kW"
 data.raw["roboport"]["roboport"].logistics_radius = data.raw["roboport"]["roboport"].logistics_radius * settings.startup["roboport-logistics-radius-multiplier"].value
 data.raw["roboport"]["roboport"].construction_radius = data.raw["roboport"]["roboport"].construction_radius * settings.startup["roboport-construction-radius-multiplier"].value
 
-
+data.raw["item"]["logistic-robot"].stack_size = settings.startup["robot-stack-size"].value
+data.raw["item"]["construction-robot"].stack_size = settings.startup["robot-stack-size"].value
 
 for i, v in pairs(data.raw["inserter"]) do
 v.extension_speed = v.extension_speed * settings.startup["inserter-speed-multiplier"].value
