@@ -1,8 +1,8 @@
 {
   "name": "robotworld",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "title": "Robot World",
   "author": "GamingComet",
-  "factorio_version": "0.17",
+  "factorio_version": "0.18",
   "description": "Ability to customize the performance of your robots, such as speed, range, battery size, and more. Setting to use robots early. Setting to enable quick start mode. New robotics technologies. And more!"
 }
