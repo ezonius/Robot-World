@@ -28,106 +28,134 @@ for i, v in pairs(data.raw["inserter"]) do
   v.extension_speed = v.extension_speed * settings.startup["inserter-speed-multiplier"].value
   v.rotation_speed = v.rotation_speed * settings.startup["inserter-speed-multiplier"].value
 end
+-- helper functions
+function enableRecipes(n)
+  local r = data.raw["recipe"][n]
+  if r then
+    if r.expensive == nil and r.normal == nil then
+      r.enabled = true
+      return
+    end
+    if r.expensive then 
+      r.expensive.enabled = true
+    end
+    if r.normal then
+      r.normal.enabled = true
+    end
+  end
+end
+
+function replaceIngredient(n, ing)
+  local r = data.raw["recipe"][n]
+  if r then
+    if r.expensive == nil and r.normal == nil then
+      r.ingredients = ing
+      return
+    end
+    if r.expensive then 
+      r.expensive.ingredients = ing
+    end
+    if r.normal then
+      r.normal.ingredients = ing
+    end
+  end
+end
+
+function replaceIngredientItem_f (recipe, old, new, amount)
+  local found = false
+  if old then
+    for i, component in pairs(recipe.ingredients) do
+      for _, value in pairs(component) do
+        if value == old then
+          found = true
+          recipe.ingredients[i] = {type="item", name=new, amount=amount}
+          break
+        end
+      end
+    end
+  end
+  if not found then
+    table.insert(recipe.ingredients, {type="item", name=new, amount=amount})
+  end
+end
+
+function replaceIngredientItem (recipe, old, new, amount)
+  if type(recipe) == "string" then recipe = data.raw.recipe[recipe] end
+  if not recipe then return end
+  if recipe.ingredients then
+    replaceIngredientItem_f(recipe, old, new, amount)
+  end
+  if recipe.normal and recipe.normal.ingredients then
+    replaceIngredientItem_f(recipe.normal, old, new, amount)
+  end
+  if recipe.expensive and recipe.expensive.ingredients then
+    replaceIngredientItem_f(recipe.expensive, old, new, amount)
+  end
+end
+
 
 -- Enables recipes
 
 if settings.startup["enable-early-logistic-robots"].value then
   for i, v in pairs(data.raw["technology"]["logistic-robotics"]["effects"]) do
-    data.raw["recipe"][v.recipe].enabled = true
+    enableRecipes(v.recipe)
   end
 end
 if settings.startup["enable-early-construction-robots"].value then
-  data.raw["recipe"]["construction-robot"].enabled = true
-  data.raw["recipe"]["roboport"].enabled = true
-  data.raw["recipe"]["logistic-chest-passive-provider"].enabled = true
-  data.raw["recipe"]["logistic-chest-storage"].enabled = true
+  enableRecipes("roboport")
+  enableRecipes("construction-robot")
+  enableRecipes("logistic-chest-passive-provider")
+  enableRecipes("logistic-chest-storage")
 end
 if mods["recursive-blueprints"] then
-  data.raw["recipe"]["blueprint-deployer"].enabled = true
-  data.raw["recipe"]["blueprint-deployer"].ingredients = {
+  enableRecipes("blueprint-deployer")
+  replaceIngredient("blueprint-deployer", {
     {"iron-chest", 3},
     {"electronic-circuit", 1}
-  }
+  })
   for i, v in pairs(data.raw["technology"]["circuit-network"]["effects"]) do
-    data.raw["recipe"][v.recipe].enabled = true
+    enableRecipes(v.recipe)
   end
 end
 
 if settings.startup["enable-early-logistic-system"].value then
   for i, v in pairs(data.raw["technology"]["logistic-system"]["effects"]) do
-    data.raw["recipe"][v.recipe].enabled = true
+    enableRecipes(v.recipe)
   end
 end
 
+robot_ingredient = {
+  {"iron-plate", 1},
+  {"iron-gear-wheel", 1},
+  {"electronic-circuit", 1},
+}   
+chest_ingredient = {
+  {"iron-plate", 3},
+  {"electronic-circuit", 1},
+}
+roboport_ingredient = {
+  {"iron-plate", 25},
+  {"iron-gear-wheel", 10},
+  {"electronic-circuit", 10}
+}
+
 -- Changes cost of recipes
 if settings.startup["enable-early-logistic-robots"].value then
-  data.raw["recipe"]["logistic-robot"].ingredients = 
-  {
-    {"iron-plate", 1},
-    {"iron-gear-wheel", 1},
-    {"electronic-circuit", 1},
-  }           
+  replaceIngredient("logistic-robot", robot_ingredient)           
 end
 if settings.startup["enable-early-construction-robots"].value then
-  data.raw["recipe"]["construction-robot"].ingredients = 
-  {
-    {"iron-plate", 1},
-    {"iron-gear-wheel", 1},
-    {"electronic-circuit", 1},
-  }
+  replaceIngredient("construction-robot", robot_ingredient)
 end
 
 if (settings.startup["enable-early-logistic-robots"].value or settings.startup["enable-early-construction-robots"].value) then
-  data.raw["recipe"]["logistic-chest-passive-provider"].ingredients = 
-  {
-    {"iron-plate", 3},
-    {"electronic-circuit", 1},
-  }
-  data.raw["recipe"]["logistic-chest-storage"].ingredients = 
-  {
-    {"iron-plate", 3},
-    {"electronic-circuit", 1},
-  }
-  if data.raw["recipe"]["roboport"].normal then
-    data.raw["recipe"]["roboport"].normal.ingredients = 
-    {
-      {"iron-plate", 25},
-      {"iron-gear-wheel", 10},
-      {"electronic-circuit", 10}
-    }
-  end 
-  if data.raw["recipe"]["roboport"].expensive then
-    data.raw["recipe"]["roboport"].expensive.ingredients = 
-    {
-      {"iron-plate", 25},
-      {"iron-gear-wheel", 10},
-      {"electronic-circuit", 10}
-    }
-  end 
-  data.raw["recipe"]["roboport"].expensive.ingredients = 
-  {
-    {"iron-plate", 25},
-    {"iron-gear-wheel", 10},
-    {"electronic-circuit", 10}
-  }
-  log(serpent.block(data.raw["recipe"]["roboport"]))
+  replaceIngredient("logistic-chest-passive-provider", chest_ingredient)
+  replaceIngredient("logistic-chest-storage", chest_ingredient)
+  replaceIngredient("roboport", roboport_ingredient)
 end
 if settings.startup["enable-early-logistic-system"].value then
-  data.raw["recipe"]["logistic-chest-active-provider"].ingredients = 
-  {
-    {"iron-plate", 3},
-    {"electronic-circuit", 1},
-  }
-  data.raw["recipe"]["logistic-chest-requester"].ingredients = 
-  {
-    {"iron-plate", 3},
-    {"electronic-circuit", 1},
-  }
-  data.raw["recipe"]["logistic-chest-buffer"].ingredients = 
-  {
-    {"iron-plate", 3},
-    {"electronic-circuit", 1},
-  }
+  replaceIngredient("logistic-chest-active-provider", chest_ingredient)
+  replaceIngredient("logistic-chest-requester", chest_ingredient)
+  replaceIngredient("logistic-chest-buffer", chest_ingredient)
 end
 
 
@@ -135,56 +163,21 @@ end
 
 if mods["bobelectronics"] then
   if settings.startup["enable-early-logistic-robots"].value then
-    data.raw["recipe"]["logistic-robot"].ingredients = 
-    {
-      {"iron-plate", 1},
-      {"iron-gear-wheel", 1},
-      {"basic-circuit-board", 1},
-    }           
+    replaceIngredientItem("logistic-robot","electronic-circuit", "basic-circuit-board", 1)
   end
   if settings.startup["enable-early-construction-robots"].value then
-    data.raw["recipe"]["construction-robot"].ingredients = 
-    {
-      {"iron-plate", 1},
-      {"iron-gear-wheel", 1},
-      {"basic-circuit-board", 1},
-    }
+    replaceIngredientItem("construction-robot","electronic-circuit", "basic-circuit-board", 1)
   end
   
   if (settings.startup["enable-early-logistic-robots"].value or settings.startup["enable-early-construction-robots"].value) then
-    data.raw["recipe"]["logistic-chest-passive-provider"].ingredients = 
-    {
-      {"iron-plate", 3},
-      {"basic-circuit-board", 1},
-    }
-    data.raw["recipe"]["logistic-chest-storage"].ingredients = 
-    {
-      {"iron-plate", 3},
-      {"basic-circuit-board", 1},
-    }
-    data.raw["recipe"]["roboport"].ingredients = 
-    {
-      {"iron-plate", 25},
-      {"iron-gear-wheel", 10},
-      {"basic-circuit-board", 10}
-    }
+    replaceIngredientItem("logistic-chest-passive-provider","electronic-circuit", "basic-circuit-board", 1)
+    replaceIngredientItem("logistic-chest-storage","electronic-circuit", "basic-circuit-board", 1)
+    replaceIngredientItem("roboport","electronic-circuit", "basic-circuit-board", 10)
   end
   if settings.startup["enable-early-logistic-system"].value then
-    data.raw["recipe"]["logistic-chest-active-provider"].ingredients = 
-    {
-      {"iron-plate", 3},
-      {"basic-circuit-board", 1},
-    }
-    data.raw["recipe"]["logistic-chest-requester"].ingredients = 
-    {
-      {"iron-plate", 3},
-      {"basic-circuit-board", 1},
-    }
-    data.raw["recipe"]["logistic-chest-buffer"].ingredients = 
-    {
-      {"iron-plate", 3},
-      {"basic-circuit-board", 1},
-    }
+    replaceIngredientItem("logistic-chest-active-provider","electronic-circuit", "basic-circuit-board", 1)
+    replaceIngredientItem("logistic-chest-requester","electronic-circuit", "basic-circuit-board", 1)
+    replaceIngredientItem("logistic-chest-buffer","electronic-circuit", "basic-circuit-board", 1)
   end
 end
 
