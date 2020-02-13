@@ -67,7 +67,6 @@ function replaceIngredientItem_f (recipe, old, new, amount)
     for i, component in pairs(recipe.ingredients) do
       for _, value in pairs(component) do
         if value == old then
-          log( 'found ' .. recipe.name .. ': replacing ' .. old .. ' to ' .. new)
           found = true
           recipe.ingredients[i] = {type="item", name=new, amount=amount}
           break
@@ -76,7 +75,6 @@ function replaceIngredientItem_f (recipe, old, new, amount)
     end
   end
   if not found then
-    log( 'cannot find ingredient in ' .. recipe.name .. ': adding ' .. new)
     table.insert(recipe.ingredients, {type="item", name=new, amount=amount})
   end
 end
@@ -85,15 +83,12 @@ function replaceIngredientItem (recipe, old, new, amount)
   if type(recipe) == "string" then recipe = data.raw.recipe[recipe] end
   if not recipe then return end
   if recipe.ingredients then
-    log('checking recipe.ingredients ' .. recipe.name .. ' was :: ' .. serpent.line(recipe.ingredients))
     replaceIngredientItem_f(recipe, old, new, amount)
   end
   if recipe.normal and recipe.normal.ingredients then
-    log('checking recipe.normal.ingredients ' .. recipe.name .. ' was :: ' .. serpent.line(recipe.normal.ingredients))
     replaceIngredientItem_f(recipe.normal, old, new, amount)
   end
   if recipe.expensive and recipe.expensive.ingredients then
-    log('checking recipe.expensive.ingredients ' .. recipe.name .. ' was :: ' .. serpent.line(recipe.expensive.ingredients))
     replaceIngredientItem_f(recipe.expensive, old, new, amount)
   end
 end
