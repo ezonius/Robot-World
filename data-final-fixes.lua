@@ -1,33 +1,96 @@
 -- Allows logistic robots, construction robots, and roboports to be configured
+local function MultiplyEnergy(src, multiplier)
+  if type(src) ~= "string" then
+    return src
+  end
+  local EnergyNum, EnergyUnit = src:match("(%d+)(%a+)")
+  return EnergyNum * multiplier .. EnergyUnit
+end
+-- if settings.startup["enable-for-all-tiers"].value == true then  
+  for i, v in pairs(data.raw["logistic-robot"]) do
+    v.max_energy = MultiplyEnergy(v.max_energy, settings.startup["robot-battery-size-multiplier"].value)
+    v.energy_per_move = MultiplyEnergy(v.energy_per_move, settings.startup["robot-energy-usage-multiplier"].value)
+    v.energy_per_tick = MultiplyEnergy(v.energy_per_tick, settings.startup["robot-energy-tick-usage-multiplier"].value)
+    -- local tmp_max_energy, tmp_max_energy_unit = v.max_energy:match("(%d+)(%a+)")
+    -- v.max_energy = tmp_max_energy * settings.startup["robot-battery-size-multiplier"].value .. tmp_max_energy_unit
+    
+    -- local tmp_energy_per_move, tmp_energy_per_move_unit = v.energy_per_move:match("(%d+)(%a+)")
+    -- v.energy_per_move = tmp_energy_per_move * settings.startup["robot-energy-usage-multiplier"].value .. tmp_energy_per_move_unit
 
-data.raw["logistic-robot"]["logistic-robot"].max_energy = 2000 * settings.startup["robot-battery-size-multiplier"].value .. "kJ"
-data.raw["logistic-robot"]["logistic-robot"].energy_per_move = 5 * settings.startup["robot-energy-usage-multiplier"].value .. "kJ"
-data.raw["logistic-robot"]["logistic-robot"].energy_per_tick = "0kW"
-data.raw["logistic-robot"]["logistic-robot"].max_payload_size = data.raw["logistic-robot"]["logistic-robot"].max_payload_size * settings.startup["robot-carry-size-multiplier"].value
-data.raw["logistic-robot"]["logistic-robot"].speed = data.raw["logistic-robot"]["logistic-robot"].speed * settings.startup["robot-speed-multiplier"].value
-data.raw["logistic-robot"]["logistic-robot"].max_health = data.raw["logistic-robot"]["logistic-robot"].max_health * settings.startup["robot-health-multiplier"].value
+    -- local tmp_energy_per_tick, tmp_energy_per_tick_unit = v.energy_per_tick:match("(%d+)(%a+)")
+    -- v.energy_per_tick = tmp_energy_per_tick * settings.startup["robot-energy-usage-multiplier"].value .. tmp_energy_per_tick_unit
 
-data.raw["construction-robot"]["construction-robot"].max_energy = 2000 * settings.startup["robot-battery-size-multiplier"].value .. "kJ"
-data.raw["construction-robot"]["construction-robot"].energy_per_move = 5 * settings.startup["robot-energy-usage-multiplier"].value .. "kJ"
-data.raw["construction-robot"]["construction-robot"].energy_per_tick = "0kW"
-data.raw["construction-robot"]["construction-robot"].max_payload_size = data.raw["construction-robot"]["construction-robot"].max_payload_size * settings.startup["robot-carry-size-multiplier"].value
-data.raw["construction-robot"]["construction-robot"].speed = data.raw["construction-robot"]["construction-robot"].speed* settings.startup["robot-speed-multiplier"].value
-data.raw["construction-robot"]["construction-robot"].max_health = data.raw["construction-robot"]["construction-robot"].max_health * settings.startup["robot-health-multiplier"].value
+    v.max_payload_size = v.max_payload_size * settings.startup["robot-carry-size-multiplier"].value
+    v.speed = v.speed * settings.startup["robot-speed-multiplier"].value
+    v.max_health = v.max_health * settings.startup["robot-health-multiplier"].value
+    data.raw["item"][v.name].stack_size = settings.startup["robot-stack-size"].value
+  end
+  for i, v in pairs(data.raw["construction-robot"]) do
+    --local tmp_energy, tmp_energy_unit = v.max_energy:match("(%d+)(%a+)")
+    --log( v.name .. tmp_energy .. tmp_energy_unit)
+    
+    v.max_energy = MultiplyEnergy(v.max_energy, settings.startup["robot-battery-size-multiplier"].value)
+    v.energy_per_move = MultiplyEnergy(v.energy_per_move, settings.startup["robot-energy-usage-multiplier"].value)
+    v.energy_per_tick = MultiplyEnergy(v.energy_per_tick, settings.startup["robot-energy-tick-usage-multiplier"].value)
+    -- local tmp_max_energy, tmp_max_energy_unit = v.max_energy:match("(%d+)(%a+)")
+    -- v.max_energy = tmp_max_energy * settings.startup["robot-battery-size-multiplier"].value .. tmp_max_energy_unit
+    
+    -- local tmp_energy_per_move, tmp_energy_per_move_unit = v.energy_per_move:match("(%d+)(%a+)")
+    -- v.energy_per_move = tmp_energy_per_move * settings.startup["robot-energy-usage-multiplier"].value .. tmp_energy_per_move_unit
 
-data.raw["roboport"]["roboport"].energy_source.buffer_capacity = "1MJ"
-data.raw["roboport"]["roboport"].energy_source.input_flow_limit = 5 * settings.startup["roboport-charging-rate-multiplier"].value .. "MW"
-data.raw["roboport"]["roboport"].charging_energy = 1 * settings.startup["roboport-charging-rate-multiplier"].value .. "MW"
-data.raw["roboport"]["roboport"].energy_usage = "0kW"
-data.raw["roboport"]["roboport"].logistics_radius = data.raw["roboport"]["roboport"].logistics_radius * settings.startup["roboport-logistics-radius-multiplier"].value
-data.raw["roboport"]["roboport"].construction_radius = data.raw["roboport"]["roboport"].construction_radius * settings.startup["roboport-construction-radius-multiplier"].value
+    -- local tmp_energy_per_tick, tmp_energy_per_tick_unit = v.energy_per_tick:match("(%d+)(%a+)")
+    -- v.energy_per_tick = tmp_energy_per_tick * settings.startup["robot-energy-usage-multiplier"].value .. tmp_energy_per_tick_unit
+    
+    v.max_payload_size = v.max_payload_size * settings.startup["robot-carry-size-multiplier"].value
+    v.speed = v.speed* settings.startup["robot-speed-multiplier"].value
+    v.max_health = v.max_health * settings.startup["robot-health-multiplier"].value
+    data.raw["item"][v.name].stack_size = settings.startup["robot-stack-size"].value
+  end
+  for i, v in pairs(data.raw["roboport"]) do
+    v.energy_source.buffer_capacity = MultiplyEnergy(v.energy_source.buffer_capacity, settings.startup["roboport-buffer-multiplier"].value)
+    -- v.energy_source.buffer_capacity = "1MJ"
 
-data.raw["item"]["logistic-robot"].stack_size = settings.startup["robot-stack-size"].value
-data.raw["item"]["construction-robot"].stack_size = settings.startup["robot-stack-size"].value
+    v.energy_source.input_flow_limit = MultiplyEnergy(v.energy_source.input_flow_limit, settings.startup["roboport-charging-rate-multiplier"].value)
+    -- v.energy_source.input_flow_limit = 5 * settings.startup["roboport-charging-rate-multiplier"].value .. "MW"
+    v.charging_energy = MultiplyEnergy(v.charging_energy, settings.startup["roboport-charging-rate-multiplier"].value)
+    -- v.charging_energy = 1 * settings.startup["roboport-charging-rate-multiplier"].value .. "MW"
+    v.energy_usage = MultiplyEnergy(v.energy_usage, settings.startup["roboport-energy-usage-multiplier"].value)
+    -- v.energy_usage = "0kW"
+    v.logistics_radius = v.logistics_radius * settings.startup["roboport-logistics-radius-multiplier"].value
+    v.construction_radius = v.construction_radius * settings.startup["roboport-construction-radius-multiplier"].value
+    
+  end
+-- else
+--   data.raw["logistic-robot"]["logistic-robot"].max_energy = 2000 * settings.startup["robot-battery-size-multiplier"].value .. "kJ"
+--   data.raw["logistic-robot"]["logistic-robot"].energy_per_move = 5 * settings.startup["robot-energy-usage-multiplier"].value .. "kJ"
+--   data.raw["logistic-robot"]["logistic-robot"].energy_per_tick = "0kW"
+--   data.raw["logistic-robot"]["logistic-robot"].max_payload_size = data.raw["logistic-robot"]["logistic-robot"].max_payload_size * settings.startup["robot-carry-size-multiplier"].value
+--   data.raw["logistic-robot"]["logistic-robot"].speed = data.raw["logistic-robot"]["logistic-robot"].speed * settings.startup["robot-speed-multiplier"].value
+--   data.raw["logistic-robot"]["logistic-robot"].max_health = data.raw["logistic-robot"]["logistic-robot"].max_health * settings.startup["robot-health-multiplier"].value
+  
+--   data.raw["construction-robot"]["construction-robot"].max_energy = 2000 * settings.startup["robot-battery-size-multiplier"].value .. "kJ"
+--   data.raw["construction-robot"]["construction-robot"].energy_per_move = 5 * settings.startup["robot-energy-usage-multiplier"].value .. "kJ"
+--   data.raw["construction-robot"]["construction-robot"].energy_per_tick = "0kW"
+--   data.raw["construction-robot"]["construction-robot"].max_payload_size = data.raw["construction-robot"]["construction-robot"].max_payload_size * settings.startup["robot-carry-size-multiplier"].value
+--   data.raw["construction-robot"]["construction-robot"].speed = data.raw["construction-robot"]["construction-robot"].speed* settings.startup["robot-speed-multiplier"].value
+--   data.raw["construction-robot"]["construction-robot"].max_health = data.raw["construction-robot"]["construction-robot"].max_health * settings.startup["robot-health-multiplier"].value
+  
+--   data.raw["roboport"]["roboport"].energy_source.buffer_capacity = "1MJ"
+--   data.raw["roboport"]["roboport"].energy_source.input_flow_limit = 5 * settings.startup["roboport-charging-rate-multiplier"].value .. "MW"
+--   data.raw["roboport"]["roboport"].charging_energy = 1 * settings.startup["roboport-charging-rate-multiplier"].value .. "MW"
+--   data.raw["roboport"]["roboport"].energy_usage = "0kW"
+--   data.raw["roboport"]["roboport"].logistics_radius = data.raw["roboport"]["roboport"].logistics_radius * settings.startup["roboport-logistics-radius-multiplier"].value
+--   data.raw["roboport"]["roboport"].construction_radius = data.raw["roboport"]["roboport"].construction_radius * settings.startup["roboport-construction-radius-multiplier"].value
+  
+--   data.raw["item"]["logistic-robot"].stack_size = settings.startup["robot-stack-size"].value
+--   data.raw["item"]["construction-robot"].stack_size = settings.startup["robot-stack-size"].value
+-- end
 
 for i, v in pairs(data.raw["inserter"]) do
   v.extension_speed = v.extension_speed * settings.startup["inserter-speed-multiplier"].value
   v.rotation_speed = v.rotation_speed * settings.startup["inserter-speed-multiplier"].value
 end
+
 -- helper functions
 function enableRecipes(n)
   local r = data.raw["recipe"][n]

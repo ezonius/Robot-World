@@ -1,10 +1,21 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.18.2
+Date: 2020-02-17
+  Changes:
+    - Added some settings to better scale stuff.
+  Bugfixes:
+    - Settings should now apply to all robots and roboports
+  Note:
+    - Please note that this version will change how much robots and roboports consume energy. Please check the mod settings and change as needed.
+---------------------------------------------------------------------------------------------------
 Version: 0.18.1
-  Bugfixes: 
+Date: 2020-02-13
+  Bugfixes:
     - fixes issues with bobs electronics
 
 ---------------------------------------------------------------------------------------------------
 Version: 0.18.0
+Date: 2020-02-04
   Changes:
     - Updated to Factorio version 0.18
   Bugfixes:

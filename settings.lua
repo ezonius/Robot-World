@@ -1,4 +1,10 @@
 data:extend({
+  -- {
+  --   type = "bool-setting",
+  --   name = "enable-for-all-tiers",
+  --   setting_type = "startup",
+  --   default_value = false,
+  -- },
   {
     type = "double-setting",
     name = "robot-carry-size-multiplier",
@@ -25,6 +31,12 @@ data:extend({
   },
   {
     type = "double-setting",
+    name = "robot-energy-tick-usage-multiplier",
+    setting_type = "startup",
+    default_value = 1,
+  },
+  {
+    type = "double-setting",
     name = "roboport-logistics-radius-multiplier",
     setting_type = "startup",
     default_value = 1
@@ -38,6 +50,18 @@ data:extend({
   {
     type = "double-setting",
     name = "roboport-charging-rate-multiplier",
+    setting_type = "startup",
+    default_value = 1
+  },
+  {
+    type = "double-setting",
+    name = "roboport-buffer-multiplier",
+    setting_type = "startup",
+    default_value = 1
+  },
+  {
+    type = "double-setting",
+    name = "roboport-energy-usage-multiplier",
     setting_type = "startup",
     default_value = 1
   },
