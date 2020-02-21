@@ -3,7 +3,7 @@ local function MultiplyEnergy(src, multiplier)
   if type(src) ~= "string" then
     return src
   end
-  local EnergyNum, EnergyUnit = src:match("(%d+)(%a+)")
+  local EnergyNum, EnergyUnit = src:match("(%d+%.?%d*)(%a+)")
   return EnergyNum * multiplier .. EnergyUnit
 end
 -- if settings.startup["enable-for-all-tiers"].value == true then  
