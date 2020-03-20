@@ -254,12 +254,12 @@ if (settings.startup["enable-early-logistic-robots"].value or settings.startup["
       type = "technology",
       name = "early-character-logistic-slots",
       icon_size = 128,
-      icon = "__base__/graphics/technology/character-logistic-slots.png",
+      icon = "__base__/graphics/technology/logistic-robotics.png ",
       effects =
       {
         {
-          type = "character-logistic-slots",
-          modifier = 6
+          type = "character-logistic-requests",
+          modifier = true
         },
         
       },
@@ -281,7 +281,7 @@ if (settings.startup["enable-early-logistic-robots"].value or settings.startup["
       type = "technology",
       name = "early-character-logistic-trash-slots",
       icon_size = 128,
-      icon = "__base__/graphics/technology/character-logistic-slots.png",
+      icon = "__base__/graphics/technology/logistic-robotics.png ",
       effects =
       {
         {

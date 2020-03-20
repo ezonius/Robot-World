@@ -1,4 +1,13 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.18.4
+Date: 2020-03-19
+  Bugfixes:
+    - Updated for the changes in the logistic slot changes in 0.18.13.
+  Note:
+    - This verion will ONLY work in versions 0.18.13 and up
+
+
+---------------------------------------------------------------------------------------------------
 Version: 0.18.3
 Date: 2020-02-21
   Bugfixes:
