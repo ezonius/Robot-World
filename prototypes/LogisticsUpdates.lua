@@ -76,7 +76,7 @@ local enable_early_recipes=function()
   end
 end
 
-local early_recipe_updates=function()
+function early_recipe_updates()
   robot_ingredient = {
     {"iron-plate", 1},
     {"iron-gear-wheel", 1},
@@ -249,7 +249,7 @@ end
 
 function run_early_updates()
   enable_early_recipes()
-  early_recipe_updates()
+  --early_recipe_updates()
   enable_early_tech()
 end
 

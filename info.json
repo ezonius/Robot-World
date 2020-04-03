@@ -10,6 +10,7 @@
   "dependencies": [
     "base >= 0.18.13",
     "? aai-industry >= 0.3.6",
-    "? bobelectronics >= 0.18"
+    "? bobelectronics >= 0.18",
+    "(?) boblogistics >= 0.18"
   ]
 }
