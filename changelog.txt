@@ -2,7 +2,7 @@
 Version: 0.18.7
 Date: 2020-06-22
   Changes:
-    - You can now set your construction/logistics area to a specific value.
+    - You can now set your construction/logistics area to a specific value. (suggested by slippycheeze)
   Note:
     - If you do set your construction/logistics area to a specific value, it will change ALL your roboport areas to that exact value.
 
