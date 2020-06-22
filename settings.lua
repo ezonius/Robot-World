@@ -48,6 +48,24 @@ data:extend({
     default_value = 1
   },
   {
+    type = "int-setting",
+    name = "roboport-logistics-radius-value",
+    setting_type = "startup",
+    default_value = -1
+  },
+  {
+    type = "int-setting",
+    name = "roboport-construction-radius-value",
+    setting_type = "startup",
+    default_value = -1
+  },
+  -- {
+  --   type = "bool-setting",
+  --   name = "only-modify-vanilla-roboport-radius",
+  --   setting_type = "startup",
+  --   default_value = false
+  -- },
+  {
     type = "double-setting",
     name = "roboport-charging-rate-multiplier",
     setting_type = "startup",

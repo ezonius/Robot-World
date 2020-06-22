@@ -31,8 +31,16 @@ local early_energy_updates=function()
     -- v.charging_energy = 1 * settings.startup["roboport-charging-rate-multiplier"].value .. "MW"
     v.energy_usage = MultiplyEnergy(v.energy_usage, settings.startup["roboport-energy-usage-multiplier"].value)
     -- v.energy_usage = "0kW"
-    v.logistics_radius = v.logistics_radius * settings.startup["roboport-logistics-radius-multiplier"].value
-    v.construction_radius = v.construction_radius * settings.startup["roboport-construction-radius-multiplier"].value
+    logistics_rad = v.logistics_radius
+    construction_rad = v.construction_radius
+    if settings.startup["roboport-logistics-radius-value"].value >= 0 then
+      logistics_rad = settings.startup["roboport-logistics-radius-value"].value
+    end
+    if settings.startup["roboport-construction-radius-value"].value >= 0 then
+      construction_rad = settings.startup["roboport-construction-radius-value"].value
+    end
+    v.logistics_radius = logistics_rad * settings.startup["roboport-logistics-radius-multiplier"].value
+    v.construction_radius = construction_rad * settings.startup["roboport-construction-radius-multiplier"].value
   end
 end
 
