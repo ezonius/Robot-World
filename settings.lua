@@ -59,12 +59,12 @@ data:extend({
     setting_type = "startup",
     default_value = -1
   },
-  -- {
-  --   type = "bool-setting",
-  --   name = "only-modify-vanilla-roboport-radius",
-  --   setting_type = "startup",
-  --   default_value = false
-  -- },
+  {
+    type = "bool-setting",
+    name = "only-modify-vanilla-roboport",
+    setting_type = "startup",
+    default_value = false
+  },
   {
     type = "double-setting",
     name = "roboport-charging-rate-multiplier",

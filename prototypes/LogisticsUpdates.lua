@@ -21,8 +21,11 @@ local early_energy_updates=function()
     v.max_health = v.max_health * settings.startup["robot-health-multiplier"].value
     data.raw["item"][v.name].stack_size = settings.startup["robot-stack-size"].value
   end
-
   for i, v in pairs(data.raw["roboport"]) do
+    log(serpent.block(v.name))
+    if v.name ~= "roboport" and settings.startup["only-modify-vanilla-roboport"].value then
+      goto continue
+    end
     v.energy_source.buffer_capacity = MultiplyEnergy(v.energy_source.buffer_capacity, settings.startup["roboport-buffer-multiplier"].value)
     -- v.energy_source.buffer_capacity = "1MJ"
     v.energy_source.input_flow_limit = MultiplyEnergy(v.energy_source.input_flow_limit, settings.startup["roboport-charging-rate-multiplier"].value)
@@ -41,6 +44,7 @@ local early_energy_updates=function()
     end
     v.logistics_radius = logistics_rad * settings.startup["roboport-logistics-radius-multiplier"].value
     v.construction_radius = construction_rad * settings.startup["roboport-construction-radius-multiplier"].value
+    ::continue::
   end
 end
 
