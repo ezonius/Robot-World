@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.1
+Date: 2020-08-20
+  Changes:
+    - All multipliers will now have a minimum value of 0 so that you may no longer use a negative value.
+
+---------------------------------------------------------------------------------------------------
 Version: 1.0.0
 Date: 2020-08-18
   Changes:

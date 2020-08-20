@@ -10,42 +10,49 @@ data:extend({
     name = "robot-carry-size-multiplier",
     setting_type = "startup",
     default_value = 1,
+    minimum_value = 0,
   },
   {
     type = "double-setting",
     name = "robot-speed-multiplier",
     setting_type = "startup",
     default_value = 1,
+    minimum_value = 0,
   },
   {
     type = "double-setting",
     name = "robot-battery-size-multiplier",
     setting_type = "startup",
     default_value = 1,
+    minimum_value = 0,
   },
   {
     type = "double-setting",
     name = "robot-energy-usage-multiplier",
     setting_type = "startup",
     default_value = 1,
+    minimum_value = 0,
   },
   {
     type = "double-setting",
     name = "robot-energy-tick-usage-multiplier",
     setting_type = "startup",
     default_value = 1,
+    minimum_value = 0,
   },
   {
     type = "double-setting",
     name = "roboport-logistics-radius-multiplier",
     setting_type = "startup",
-    default_value = 1
+    default_value = 1,
+    minimum_value = 0,
   },
   {
     type = "double-setting",
     name = "roboport-construction-radius-multiplier",
     setting_type = "startup",
-    default_value = 1
+    default_value = 1,
+    minimum_value = 0,
   },
   {
     type = "int-setting",
@@ -69,19 +76,22 @@ data:extend({
     type = "double-setting",
     name = "roboport-charging-rate-multiplier",
     setting_type = "startup",
-    default_value = 1
+    default_value = 1,
+    minimum_value = 0,
   },
   {
     type = "double-setting",
     name = "roboport-buffer-multiplier",
     setting_type = "startup",
-    default_value = 1
+    default_value = 1,
+    minimum_value = 0,
   },
   {
     type = "double-setting",
     name = "roboport-energy-usage-multiplier",
     setting_type = "startup",
-    default_value = 1
+    default_value = 1,
+    minimum_value = 0,
   },
   {
     type = "double-setting",
@@ -93,7 +103,8 @@ data:extend({
     type = "double-setting",
     name = "robot-health-multiplier",
     setting_type = "startup",
-    default_value = 1
+    default_value = 1,
+    minimum_value = 0,
   },
   {
     type = "bool-setting",
@@ -123,6 +134,7 @@ data:extend({
     type = "double-setting",
     name = "inserter-speed-multiplier",
     setting_type = "startup",
-    default_value = 1
+    default_value = 1,
+    minimum_value = 0,
   },
 })

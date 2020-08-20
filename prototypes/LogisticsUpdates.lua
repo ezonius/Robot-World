@@ -22,7 +22,6 @@ local early_energy_updates=function()
     data.raw["item"][v.name].stack_size = settings.startup["robot-stack-size"].value
   end
   for i, v in pairs(data.raw["roboport"]) do
-    log(serpent.block(v.name))
     if v.name ~= "roboport" and settings.startup["only-modify-vanilla-roboport"].value then
       goto continue
     end
