@@ -5,7 +5,7 @@ Date: 2021-06-10
     - Should now be compatible with 248k mod
   Note:
     - If you find any other mod that is not compatible please feel free to ask for a fix
-    
+
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.0
 Date: 2020-11-27
