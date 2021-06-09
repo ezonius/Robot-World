@@ -8,7 +8,15 @@ local early_energy_updates=function()
     v.max_payload_size = v.max_payload_size * settings.startup["robot-carry-size-multiplier"].value
     v.speed = v.speed * settings.startup["robot-speed-multiplier"].value
     v.max_health = v.max_health * settings.startup["robot-health-multiplier"].value
-    data.raw["item"][v.name].stack_size = settings.startup["robot-stack-size"].value
+    -- workaround for 248k
+    if data.raw["item"][v.name] == nil then
+      if mods["248k"] then
+        itemname = string.gsub(v.name, "_entity", "_item")
+        data.raw["item"][itemname].stack_size = settings.startup["robot-stack-size"].value
+      end
+    else 
+      data.raw["item"][v.name].stack_size = settings.startup["robot-stack-size"].value
+    end
   end
 
   for i, v in pairs(data.raw["construction-robot"]) do
@@ -19,7 +27,15 @@ local early_energy_updates=function()
     v.max_payload_size = v.max_payload_size * settings.startup["robot-carry-size-multiplier"].value
     v.speed = v.speed* settings.startup["robot-speed-multiplier"].value
     v.max_health = v.max_health * settings.startup["robot-health-multiplier"].value
-    data.raw["item"][v.name].stack_size = settings.startup["robot-stack-size"].value
+    -- workaround for 248k
+    if data.raw["item"][v.name] == nil then
+      if mods["248k"] then
+        itemname = string.gsub(v.name, "_entity", "_item")
+        data.raw["item"][itemname].stack_size = settings.startup["robot-stack-size"].value
+      end
+    else 
+      data.raw["item"][v.name].stack_size = settings.startup["robot-stack-size"].value
+    end
   end
   for i, v in pairs(data.raw["roboport"]) do
     if v.name ~= "roboport" and settings.startup["only-modify-vanilla-roboport"].value then

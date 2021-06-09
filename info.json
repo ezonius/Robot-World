@@ -1,6 +1,6 @@
 {
   "name": "robotworld-continued",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "title": "Robot World Continued",
   "author": "thinkong",
   "contact": "https://github.com/thinkong/Robot-World/issues",
@@ -11,6 +11,7 @@
     "base >= 1.1.0",
     "? aai-industry >= 0.3.6",
     "? bobelectronics >= 0.18",
-    "(?) boblogistics >= 0.18"
+    "(?) boblogistics >= 0.18",
+    "(?) 248k >= 0.5.2"
   ]
 }
