@@ -231,7 +231,7 @@ local enable_early_tech=function()
           },
 
         },
-        prerequisites = {"robotics"},
+        prerequisites = {"logistics"},
         unit =
         {
           count = 100,
@@ -257,7 +257,7 @@ local enable_early_tech=function()
             modifier = 1
           },
         },
-        prerequisites = {"robotics"},
+        prerequisites = {"logistics"},
         unit =
         {
           count = 100,
