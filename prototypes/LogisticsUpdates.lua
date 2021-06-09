@@ -170,7 +170,7 @@ local enable_early_tech=function()
       {
         type = "technology",
         name = "early-character-logistic-slots",
-        icon_size = 128,
+        icon_size = 256, icon_mipmaps = 4,
         icon = "__base__/graphics/technology/logistic-robotics.png",
         effects =
         {
@@ -196,7 +196,7 @@ local enable_early_tech=function()
       {
         type = "technology",
         name = "early-character-logistic-trash-slots",
-        icon_size = 128,
+        icon_size = 256, icon_mipmaps = 4,
         icon = "__base__/graphics/technology/logistic-robotics.png",
         effects =
         {
@@ -221,8 +221,8 @@ local enable_early_tech=function()
       {
         type = "technology",
         name = "early-worker-robots-speed",
-        icon_size = 128,
-        icon = "__base__/graphics/technology/worker-robots-speed.png",
+        icon_size = 256, icon_mipmaps = 4,
+        icons = util.technology_icon_constant_movement_speed("__base__/graphics/technology/worker-robots-speed.png"),
         effects =
         {
           {
@@ -248,8 +248,8 @@ local enable_early_tech=function()
       {
         type = "technology",
         name = "early-worker-robots-storage",
-        icon_size = 128,
-        icon = "__base__/graphics/technology/worker-robots-storage.png",
+        icon_size = 256, icon_mipmaps = 4,
+        icons = util.technology_icon_constant_capacity("__base__/graphics/technology/worker-robots-storage.png"),
         effects =
         {
           {
