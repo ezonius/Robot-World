@@ -6,6 +6,12 @@ data:extend({
   --   default_value = false,
   -- },
   {
+    type = "bool-setting",
+    name = "disable-mod-recipes",
+    setting_type = "startup",
+    default_value = false,
+  },
+  {
     type = "double-setting",
     name = "robot-carry-size-multiplier",
     setting_type = "startup",

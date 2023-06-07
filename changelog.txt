@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.1.5
+Date: 2023-06-08
+  Changes:
+    - Added an option to disable "cheap" recipes ( requested by traxim )
+---------------------------------------------------------------------------------------------------
+Version: 1.1.4
+Date: 2022-02-18
+  Bugfixes:
+    - if logistics connection distance is smaller than radius, distance is increased to radius
+
+---------------------------------------------------------------------------------------------------
 Version: 1.1.3
 Date: 2021-06-10
   Bugfixes:

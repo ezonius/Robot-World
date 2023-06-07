@@ -104,6 +104,9 @@ local enable_early_recipes=function()
 end
 
 function early_recipe_updates()
+  if settings.startup["disable-mod-recipes"].value then
+    return
+  end
   robot_ingredient = {
     {"iron-plate", 1},
     {"iron-gear-wheel", 1},
@@ -283,4 +286,13 @@ end
 function run_later_updates()
   early_energy_updates()
   inserter_speed_updates()
+  
+  for i, v in pairs(data.raw["roboport"]) do
+    log(serpent.block(v))
+    if v.logistics_connection_distance ~= nil then
+      if v.logistics_radius > v.logistics_connection_distance then
+        v.logistics_connection_distance = v.logistics_radius
+      end
+    end
+  end
 end
