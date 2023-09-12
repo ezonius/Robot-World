@@ -3,10 +3,13 @@ local early_energy_updates=function()
   -- if settings.startup["enable-for-all-tiers"].value == true then
   for i, v in pairs(data.raw["logistic-robot"]) do
     v.max_energy = MultiplyEnergy(v.max_energy, settings.startup["robot-battery-size-multiplier"].value)
+    v.max_energy = MultiplyEnergy(v.max_energy, settings.startup["logistics-robot-battery-size-multiplier"].value)
     v.energy_per_move = MultiplyEnergy(v.energy_per_move, settings.startup["robot-energy-usage-multiplier"].value)
+    v.energy_per_move = MultiplyEnergy(v.energy_per_move, settings.startup["logistics-robot-energy-usage-multiplier"].value)
     v.energy_per_tick = MultiplyEnergy(v.energy_per_tick, settings.startup["robot-energy-tick-usage-multiplier"].value)
-    v.max_payload_size = v.max_payload_size * settings.startup["robot-carry-size-multiplier"].value
-    v.speed = v.speed * settings.startup["robot-speed-multiplier"].value
+    v.energy_per_tick = MultiplyEnergy(v.energy_per_tick, settings.startup["logistics-robot-energy-tick-usage-multiplier"].value)
+    v.max_payload_size = v.max_payload_size * settings.startup["robot-carry-size-multiplier"].value * settings.startup["logistics-robot-carry-size-multiplier"].value
+    v.speed = v.speed * settings.startup["robot-speed-multiplier"].value * settings.startup["logistics-robot-speed-multiplier"].value
     v.max_health = v.max_health * settings.startup["robot-health-multiplier"].value
     -- workaround for 248k
     if data.raw["item"][v.name] == nil then
@@ -21,11 +24,14 @@ local early_energy_updates=function()
 
   for i, v in pairs(data.raw["construction-robot"]) do
     v.max_energy = MultiplyEnergy(v.max_energy, settings.startup["robot-battery-size-multiplier"].value)
+    v.max_energy = MultiplyEnergy(v.max_energy, settings.startup["construction-robot-battery-size-multiplier"].value)
     v.energy_per_move = MultiplyEnergy(v.energy_per_move, settings.startup["robot-energy-usage-multiplier"].value)
+    v.energy_per_move = MultiplyEnergy(v.energy_per_move, settings.startup["construction-robot-energy-usage-multiplier"].value)
     v.energy_per_tick = MultiplyEnergy(v.energy_per_tick, settings.startup["robot-energy-tick-usage-multiplier"].value)
+    v.energy_per_tick = MultiplyEnergy(v.energy_per_tick, settings.startup["construction-robot-energy-tick-usage-multiplier"].value)
 
-    v.max_payload_size = v.max_payload_size * settings.startup["robot-carry-size-multiplier"].value
-    v.speed = v.speed* settings.startup["robot-speed-multiplier"].value
+    v.max_payload_size = v.max_payload_size * settings.startup["robot-carry-size-multiplier"].value * settings.startup["construction-robot-carry-size-multiplier"].value
+    v.speed = v.speed* settings.startup["robot-speed-multiplier"].value * settings.startup["construction-robot-speed-multiplier"].value 
     v.max_health = v.max_health * settings.startup["robot-health-multiplier"].value
     -- workaround for 248k
     if data.raw["item"][v.name] == nil then
@@ -288,7 +294,7 @@ function run_later_updates()
   inserter_speed_updates()
   
   for i, v in pairs(data.raw["roboport"]) do
-    log(serpent.block(v))
+    -- log(serpent.block(v))
     if v.logistics_connection_distance ~= nil then
       if v.logistics_radius > v.logistics_connection_distance then
         v.logistics_connection_distance = v.logistics_radius

@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.1.7
+Date: 2023-09-12
+  Changes:
+    - added seperate settings for robot speed, energy consumption, batter size, carry size. (requested by Scorpio_King)
+---------------------------------------------------------------------------------------------------
+Version: 1.1.6
+Date: 2023-06-30
+  Changes:
+    - removed logs that are causing a lot of logs..
+
+---------------------------------------------------------------------------------------------------
 Version: 1.1.5
 Date: 2023-06-08
   Changes:
