@@ -2,6 +2,7 @@ require("prototypes.functions")
 local early_energy_updates=function()
   -- if settings.startup["enable-for-all-tiers"].value == true then
   for i, v in pairs(data.raw["logistic-robot"]) do
+    if tableContains(v.flags, "hidden") then goto continuelogisticrobotloop end
     v.max_energy = MultiplyEnergy(v.max_energy, settings.startup["robot-battery-size-multiplier"].value)
     v.max_energy = MultiplyEnergy(v.max_energy, settings.startup["logistics-robot-battery-size-multiplier"].value)
     v.energy_per_move = MultiplyEnergy(v.energy_per_move, settings.startup["robot-energy-usage-multiplier"].value)
@@ -20,9 +21,11 @@ local early_energy_updates=function()
     else 
       data.raw["item"][v.name].stack_size = settings.startup["robot-stack-size"].value
     end
+    ::continuelogisticrobotloop::
   end
 
   for i, v in pairs(data.raw["construction-robot"]) do
+    if tableContains(v.flags, "hidden") then goto continueconstructionrobotloop end
     v.max_energy = MultiplyEnergy(v.max_energy, settings.startup["robot-battery-size-multiplier"].value)
     v.max_energy = MultiplyEnergy(v.max_energy, settings.startup["construction-robot-battery-size-multiplier"].value)
     v.energy_per_move = MultiplyEnergy(v.energy_per_move, settings.startup["robot-energy-usage-multiplier"].value)
@@ -42,6 +45,7 @@ local early_energy_updates=function()
     else 
       data.raw["item"][v.name].stack_size = settings.startup["robot-stack-size"].value
     end
+    ::continueconstructionrobotloop::
   end
   for i, v in pairs(data.raw["roboport"]) do
     if v.name ~= "roboport" and settings.startup["only-modify-vanilla-roboport"].value then
