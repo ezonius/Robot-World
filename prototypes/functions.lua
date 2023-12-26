@@ -7,6 +7,17 @@ function MultiplyEnergy(src, multiplier)
   return EnergyNum * multiplier .. EnergyUnit
 end
 -- helper functions
+
+function tableContains(table, value)
+  if table == nil then return false end
+  for i = 1,#table do
+    if (table[i] == value) then
+      return true
+    end
+  end
+  return false
+end
+
 --Enable Recipes
 function enableRecipes(n)
   local r = data.raw["recipe"][n]

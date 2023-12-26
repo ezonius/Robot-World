@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.1.8
+Date: 2023-12-27
+  Changes:
+    - Will no longer change any values for construction robots and logistic robots with "hidden" bot flag which caused problems with companion drones. (requested by DKir)
+---------------------------------------------------------------------------------------------------
 Version: 1.1.7
 Date: 2023-09-12
   Changes:
