@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.1.9
+Date: 2024-01-28
+  Changes:
+    - Added optional dependency for K2 and Space Exploration because mod loading order made some options not working. (Reported by Azocarcs and Head)
+---------------------------------------------------------------------------------------------------
 Version: 1.1.8
 Date: 2023-12-27
   Changes:
