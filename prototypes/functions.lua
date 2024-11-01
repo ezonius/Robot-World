@@ -37,16 +37,22 @@ end
 --replace all Ingredients
 function replaceIngredient(n, ing)
   local r = data.raw["recipe"][n]
+  local ingredients = {}
+  
+  for k, v in ipairs(ing) do 
+    ingredients[k] = { type="item", name=v[1], amount=v[2] }
+  end
+
   if r then
     if r.expensive == nil and r.normal == nil then
-      r.ingredients = {table.unpack(ing)}
+      r.ingredients = ingredients
       return
     end
     if r.expensive then
-      r.expensive.ingredients = {table.unpack(ing)}
+      r.expensive.ingredients = ingredients
     end
     if r.normal then
-      r.normal.ingredients = {table.unpack(ing)}
+      r.normal.ingredients = ingredients
     end
   end
 end

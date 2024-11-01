@@ -91,8 +91,8 @@ local enable_early_recipes=function()
   if settings.startup["enable-early-construction-robots"].value then
     enableRecipes("roboport")
     enableRecipes("construction-robot")
-    enableRecipes("logistic-chest-passive-provider")
-    enableRecipes("logistic-chest-storage")
+    enableRecipes("passive-provider-chest")
+    enableRecipes("storage-chest")
   end
 
   if mods["recursive-blueprints"] then
@@ -140,14 +140,14 @@ function early_recipe_updates()
   end
 
   if (settings.startup["enable-early-logistic-robots"].value or settings.startup["enable-early-construction-robots"].value) then
-    replaceIngredient("logistic-chest-passive-provider", chest_ingredient)
-    replaceIngredient("logistic-chest-storage", chest_ingredient)
+    replaceIngredient("passive-provider-chest", chest_ingredient)
+    replaceIngredient("storage-chest", chest_ingredient)
     replaceIngredient("roboport", roboport_ingredient)
   end
   if settings.startup["enable-early-logistic-system"].value then
-    replaceIngredient("logistic-chest-active-provider", chest_ingredient)
-    replaceIngredient("logistic-chest-requester", chest_ingredient)
-    replaceIngredient("logistic-chest-buffer", chest_ingredient)
+    replaceIngredient("active-provider-chest", chest_ingredient)
+    replaceIngredient("requester-chest", chest_ingredient)
+    replaceIngredient("buffer-chest", chest_ingredient)
   end
 
   -- Makes electronic-circuits into basic-circuit-boards if bobelectronics is enabled
@@ -160,14 +160,14 @@ function early_recipe_updates()
     end
 
     if (settings.startup["enable-early-logistic-robots"].value or settings.startup["enable-early-construction-robots"].value) then
-      replaceIngredientItem("logistic-chest-passive-provider","electronic-circuit", "basic-circuit-board", 1)
-      replaceIngredientItem("logistic-chest-storage","electronic-circuit", "basic-circuit-board", 1)
+      replaceIngredientItem("passive-provider-chest","electronic-circuit", "basic-circuit-board", 1)
+      replaceIngredientItem("storage-chest","electronic-circuit", "basic-circuit-board", 1)
       replaceIngredientItem("roboport","electronic-circuit", "basic-circuit-board", 10)
     end
     if settings.startup["enable-early-logistic-system"].value then
-      replaceIngredientItem("logistic-chest-active-provider","electronic-circuit", "basic-circuit-board", 1)
-      replaceIngredientItem("logistic-chest-requester","electronic-circuit", "basic-circuit-board", 1)
-      replaceIngredientItem("logistic-chest-buffer","electronic-circuit", "basic-circuit-board", 1)
+      replaceIngredientItem("active-provider-chest","electronic-circuit", "basic-circuit-board", 1)
+      replaceIngredientItem("requester-chest","electronic-circuit", "basic-circuit-board", 1)
+      replaceIngredientItem("buffer-chest","electronic-circuit", "basic-circuit-board", 1)
     end
   end
 end

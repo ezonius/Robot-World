@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.0
+Date: 2024-11-01
+  Changes:
+    - Updated to work for Factorio 2.0. (I have checked basic functionality AKA the mod will load and start a new game..)
+---------------------------------------------------------------------------------------------------
 Version: 1.1.9
 Date: 2024-01-28
   Changes:

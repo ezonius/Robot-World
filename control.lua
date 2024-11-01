@@ -15,8 +15,8 @@ script.on_event(defines.events.on_player_created, function(event)
             player.insert {name = "pipe-to-ground", count = 2}
             player.insert {name = "lab", count = 10}
             player.insert {name = "coal", count = 50}
-            player.insert {name = "logistic-chest-passive-provider", count = 50}
-            player.insert {name = "logistic-chest-requester", count = 50}
+            player.insert {name = "passive-provider-chest", count = 50}
+            player.insert {name = "requester-chest", count = 50}
             player.insert {name = "logistic-robot", count = 200}
             player.insert {name = "construction-robot", count = 50}
             player.insert {name = "roboport", count = 10}
@@ -40,8 +40,8 @@ script.on_event(defines.events.on_cutscene_cancelled, function(event)
         player.insert {name = "pipe-to-ground", count = 2}
         player.insert {name = "lab", count = 10}
         player.insert {name = "coal", count = 50}
-        player.insert {name = "logistic-chest-passive-provider", count = 50}
-        player.insert {name = "logistic-chest-requester", count = 50}
+        player.insert {name = "passive-provider-chest", count = 50}
+        player.insert {name = "requester-chest", count = 50}
         player.insert {name = "logistic-robot", count = 200}
         player.insert {name = "construction-robot", count = 50}
         player.insert {name = "roboport", count = 10}
