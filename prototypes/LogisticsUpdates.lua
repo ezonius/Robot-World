@@ -188,11 +188,33 @@ function early_recipe_updates()
   end
 end
 
-local enable_early_tech=function()
-  -- Adds some new technologies
-  if (settings.startup["enable-early-logistic-robots"].value or settings.startup["enable-early-construction-robots"].value) then
-    data.raw.technology["worker-robots-storage-1"].prerequisites = {"early-worker-robots-storage"}
-    data.raw.technology["worker-robots-speed-1"].prerequisites = {"early-worker-robots-speed"}
+local enable_early_tech = function()
+    -- Adds some new technologies
+
+    if mods["aai-containers"] and settings.startup["enable-early-logistic-system"].value then
+        local post_logistics_research = { "aai-strongbox-logistic", "aai-storehouse-logistic",
+            "aai-warehouse-logistic" }
+        for _, name in pairs(post_logistics_research) do
+            local newPrereq = {}
+            for _, prereq in pairs(data.raw.technology[name].prerequisites) do
+                if prereq ~= "logistic-system" then
+                    table.insert(newPrereq, prereq)
+                end
+            end
+            data.raw.technology[name].prerequisites = newPrereq
+
+            local newIngredients = {}
+            for _, ingredient in pairs(data.raw.technology[name].unit.ingredients) do
+                if ingredient[1] ~= "space-science-pack" then
+                    table.insert(newIngredients, ingredient)
+                end
+            end
+            data.raw.technology[name].unit.ingredients = newIngredients
+        end
+    end
+    if (settings.startup["enable-early-logistic-robots"].value or settings.startup["enable-early-construction-robots"].value) then
+        data.raw.technology["worker-robots-storage-1"].prerequisites = { "early-worker-robots-storage" }
+        data.raw.technology["worker-robots-speed-1"].prerequisites = { "early-worker-robots-speed" }
 
     data:extend({
       --early logistics slots
