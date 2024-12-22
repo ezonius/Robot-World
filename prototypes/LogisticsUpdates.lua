@@ -33,44 +33,60 @@ local early_energy_updates=function()
     v.energy_per_tick = MultiplyEnergy(v.energy_per_tick, settings.startup["robot-energy-tick-usage-multiplier"].value)
     v.energy_per_tick = MultiplyEnergy(v.energy_per_tick, settings.startup["construction-robot-energy-tick-usage-multiplier"].value)
 
-    v.max_payload_size = v.max_payload_size * settings.startup["robot-carry-size-multiplier"].value * settings.startup["construction-robot-carry-size-multiplier"].value
-    v.speed = v.speed* settings.startup["robot-speed-multiplier"].value * settings.startup["construction-robot-speed-multiplier"].value 
-    v.max_health = v.max_health * settings.startup["robot-health-multiplier"].value
-    -- workaround for 248k
-    if data.raw["item"][v.name] == nil then
-      if mods["248k"] then
-        itemname = string.gsub(v.name, "_entity", "_item")
-        data.raw["item"][itemname].stack_size = settings.startup["robot-stack-size"].value
-      end
-    else 
-      data.raw["item"][v.name].stack_size = settings.startup["robot-stack-size"].value
+        v.max_payload_size = v.max_payload_size * settings.startup["robot-carry-size-multiplier"].value *
+            settings.startup["construction-robot-carry-size-multiplier"].value
+        v.speed = v.speed * settings.startup["robot-speed-multiplier"].value *
+            settings.startup["construction-robot-speed-multiplier"].value
+        v.max_health = v.max_health * settings.startup["robot-health-multiplier"].value
+        -- workaround for 248k
+        if data.raw["item"][v.name] == nil then
+            if mods["248k"] then
+                itemname = string.gsub(v.name, "_entity", "_item")
+                data.raw["item"][itemname].stack_size = settings.startup["robot-stack-size"].value
+            end
+        else
+            data.raw["item"][v.name].stack_size = settings.startup["robot-stack-size"].value
+        end
+        ::continueconstructionrobotloop::
     end
-    ::continueconstructionrobotloop::
-  end
-  for i, v in pairs(data.raw["roboport"]) do
-    if v.name ~= "roboport" and settings.startup["only-modify-vanilla-roboport"].value then
-      goto continue
+    local groups = { "roboport", "roboport-equipment" }
+    local vanilla_roboports = {
+        ["roboport"] = true,
+        ["personal-roboport-equipment"] = true,
+        ["personal-roboport-mk2-equipment"] = true
+    }
+    for _, group_name in pairs(groups) do
+        for i, v in pairs(data.raw[group_name]) do
+            if not vanilla_roboports[v.name] and settings.startup["only-modify-vanilla-roboport"].value then
+                goto continue
+            end
+            v.energy_source.buffer_capacity = MultiplyEnergy(v.energy_source.buffer_capacity,
+                settings.startup["roboport-buffer-multiplier"].value)
+            -- v.energy_source.buffer_capacity = "1MJ"
+            v.energy_source.input_flow_limit = MultiplyEnergy(v.energy_source.input_flow_limit,
+                settings.startup["roboport-charging-rate-multiplier"].value)
+            -- v.energy_source.input_flow_limit = 5 * settings.startup["roboport-charging-rate-multiplier"].value .. "MW"
+            v.charging_energy = MultiplyEnergy(v.charging_energy,
+                settings.startup["roboport-charging-rate-multiplier"].value)
+            -- v.charging_energy = 1 * settings.startup["roboport-charging-rate-multiplier"].value .. "MW"
+            v.energy_usage = MultiplyEnergy(v.energy_usage, settings.startup["roboport-energy-usage-multiplier"].value)
+            -- v.energy_usage = "0kW"
+            if group_name ~= "roboport" then
+                goto continue
+            end
+            logistics_rad = v.logistics_radius
+            construction_rad = v.construction_radius
+            if settings.startup["roboport-logistics-radius-value"].value >= 0 then
+                logistics_rad = settings.startup["roboport-logistics-radius-value"].value
+            end
+            if settings.startup["roboport-construction-radius-value"].value >= 0 then
+                construction_rad = settings.startup["roboport-construction-radius-value"].value
+            end
+            v.logistics_radius = logistics_rad * settings.startup["roboport-logistics-radius-multiplier"].value
+            v.construction_radius = construction_rad * settings.startup["roboport-construction-radius-multiplier"].value
+            ::continue::
+        end
     end
-    v.energy_source.buffer_capacity = MultiplyEnergy(v.energy_source.buffer_capacity, settings.startup["roboport-buffer-multiplier"].value)
-    -- v.energy_source.buffer_capacity = "1MJ"
-    v.energy_source.input_flow_limit = MultiplyEnergy(v.energy_source.input_flow_limit, settings.startup["roboport-charging-rate-multiplier"].value)
-    -- v.energy_source.input_flow_limit = 5 * settings.startup["roboport-charging-rate-multiplier"].value .. "MW"
-    v.charging_energy = MultiplyEnergy(v.charging_energy, settings.startup["roboport-charging-rate-multiplier"].value)
-    -- v.charging_energy = 1 * settings.startup["roboport-charging-rate-multiplier"].value .. "MW"
-    v.energy_usage = MultiplyEnergy(v.energy_usage, settings.startup["roboport-energy-usage-multiplier"].value)
-    -- v.energy_usage = "0kW"
-    logistics_rad = v.logistics_radius
-    construction_rad = v.construction_radius
-    if settings.startup["roboport-logistics-radius-value"].value >= 0 then
-      logistics_rad = settings.startup["roboport-logistics-radius-value"].value
-    end
-    if settings.startup["roboport-construction-radius-value"].value >= 0 then
-      construction_rad = settings.startup["roboport-construction-radius-value"].value
-    end
-    v.logistics_radius = logistics_rad * settings.startup["roboport-logistics-radius-multiplier"].value
-    v.construction_radius = construction_rad * settings.startup["roboport-construction-radius-multiplier"].value
-    ::continue::
-  end
 end
 
 local inserter_speed_updates=function()
