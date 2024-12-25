@@ -1,37 +1,45 @@
 require("prototypes.functions")
-local early_energy_updates=function()
-  -- if settings.startup["enable-for-all-tiers"].value == true then
-  for i, v in pairs(data.raw["logistic-robot"]) do
-    if tableContains(v.flags, "hidden") then goto continuelogisticrobotloop end
-    v.max_energy = MultiplyEnergy(v.max_energy, settings.startup["robot-battery-size-multiplier"].value)
-    v.max_energy = MultiplyEnergy(v.max_energy, settings.startup["logistics-robot-battery-size-multiplier"].value)
-    v.energy_per_move = MultiplyEnergy(v.energy_per_move, settings.startup["robot-energy-usage-multiplier"].value)
-    v.energy_per_move = MultiplyEnergy(v.energy_per_move, settings.startup["logistics-robot-energy-usage-multiplier"].value)
-    v.energy_per_tick = MultiplyEnergy(v.energy_per_tick, settings.startup["robot-energy-tick-usage-multiplier"].value)
-    v.energy_per_tick = MultiplyEnergy(v.energy_per_tick, settings.startup["logistics-robot-energy-tick-usage-multiplier"].value)
-    v.max_payload_size = v.max_payload_size * settings.startup["robot-carry-size-multiplier"].value * settings.startup["logistics-robot-carry-size-multiplier"].value
-    v.speed = v.speed * settings.startup["robot-speed-multiplier"].value * settings.startup["logistics-robot-speed-multiplier"].value
-    v.max_health = v.max_health * settings.startup["robot-health-multiplier"].value
-    -- workaround for 248k
-    if data.raw["item"][v.name] == nil then
-      if mods["248k"] then
-        itemname = string.gsub(v.name, "_entity", "_item")
-        data.raw["item"][itemname].stack_size = settings.startup["robot-stack-size"].value
-      end
-    else 
-      data.raw["item"][v.name].stack_size = settings.startup["robot-stack-size"].value
+local early_energy_updates = function()
+    -- if settings.startup["enable-for-all-tiers"].value == true then
+    for i, v in pairs(data.raw["logistic-robot"]) do
+        if TableContains(v.flags, "hidden") then goto continuelogisticrobotloop end
+        v.max_energy = MultiplyEnergy(v.max_energy, settings.startup["robot-battery-size-multiplier"].value)
+        v.max_energy = MultiplyEnergy(v.max_energy, settings.startup["logistics-robot-battery-size-multiplier"].value)
+        v.energy_per_move = MultiplyEnergy(v.energy_per_move, settings.startup["robot-energy-usage-multiplier"].value)
+        v.energy_per_move = MultiplyEnergy(v.energy_per_move,
+            settings.startup["logistics-robot-energy-usage-multiplier"].value)
+        v.energy_per_tick = MultiplyEnergy(v.energy_per_tick,
+            settings.startup["robot-energy-tick-usage-multiplier"].value)
+        v.energy_per_tick = MultiplyEnergy(v.energy_per_tick,
+            settings.startup["logistics-robot-energy-tick-usage-multiplier"].value)
+        v.max_payload_size = v.max_payload_size * settings.startup["robot-carry-size-multiplier"].value *
+            settings.startup["logistics-robot-carry-size-multiplier"].value
+        v.speed = v.speed * settings.startup["robot-speed-multiplier"].value *
+            settings.startup["logistics-robot-speed-multiplier"].value
+        v.max_health = v.max_health * settings.startup["robot-health-multiplier"].value
+        -- workaround for 248k
+        if data.raw["item"][v.name] == nil then
+            if mods["248k"] then
+                itemname = string.gsub(v.name, "_entity", "_item")
+                data.raw["item"][itemname].stack_size = settings.startup["robot-stack-size"].value
+            end
+        else
+            data.raw["item"][v.name].stack_size = settings.startup["robot-stack-size"].value
+        end
+        ::continuelogisticrobotloop::
     end
-    ::continuelogisticrobotloop::
-  end
 
-  for i, v in pairs(data.raw["construction-robot"]) do
-    if tableContains(v.flags, "hidden") then goto continueconstructionrobotloop end
-    v.max_energy = MultiplyEnergy(v.max_energy, settings.startup["robot-battery-size-multiplier"].value)
-    v.max_energy = MultiplyEnergy(v.max_energy, settings.startup["construction-robot-battery-size-multiplier"].value)
-    v.energy_per_move = MultiplyEnergy(v.energy_per_move, settings.startup["robot-energy-usage-multiplier"].value)
-    v.energy_per_move = MultiplyEnergy(v.energy_per_move, settings.startup["construction-robot-energy-usage-multiplier"].value)
-    v.energy_per_tick = MultiplyEnergy(v.energy_per_tick, settings.startup["robot-energy-tick-usage-multiplier"].value)
-    v.energy_per_tick = MultiplyEnergy(v.energy_per_tick, settings.startup["construction-robot-energy-tick-usage-multiplier"].value)
+    for i, v in pairs(data.raw["construction-robot"]) do
+        if TableContains(v.flags, "hidden") then goto continueconstructionrobotloop end
+        v.max_energy = MultiplyEnergy(v.max_energy, settings.startup["robot-battery-size-multiplier"].value)
+        v.max_energy = MultiplyEnergy(v.max_energy, settings.startup["construction-robot-battery-size-multiplier"].value)
+        v.energy_per_move = MultiplyEnergy(v.energy_per_move, settings.startup["robot-energy-usage-multiplier"].value)
+        v.energy_per_move = MultiplyEnergy(v.energy_per_move,
+            settings.startup["construction-robot-energy-usage-multiplier"].value)
+        v.energy_per_tick = MultiplyEnergy(v.energy_per_tick,
+            settings.startup["robot-energy-tick-usage-multiplier"].value)
+        v.energy_per_tick = MultiplyEnergy(v.energy_per_tick,
+            settings.startup["construction-robot-energy-tick-usage-multiplier"].value)
 
         v.max_payload_size = v.max_payload_size * settings.startup["robot-carry-size-multiplier"].value *
             settings.startup["construction-robot-carry-size-multiplier"].value
@@ -89,103 +97,124 @@ local early_energy_updates=function()
     end
 end
 
-local inserter_speed_updates=function()
-  for i, v in pairs(data.raw["inserter"]) do
-    v.extension_speed = v.extension_speed * settings.startup["inserter-speed-multiplier"].value
-    v.rotation_speed = v.rotation_speed * settings.startup["inserter-speed-multiplier"].value
-  end
+local inserter_speed_updates = function()
+    for i, v in pairs(data.raw["inserter"]) do
+        v.extension_speed = v.extension_speed * settings.startup["inserter-speed-multiplier"].value
+        v.rotation_speed = v.rotation_speed * settings.startup["inserter-speed-multiplier"].value
+    end
 end
 
 -- Enables recipes
-local enable_early_recipes=function()
-  if settings.startup["enable-early-logistic-robots"].value then
-    for i, v in pairs(data.raw["technology"]["logistic-robotics"]["effects"]) do
-      enableRecipes(v.recipe)
+local enable_early_recipes = function()
+    if settings.startup["enable-early-logistic-robots"].value then
+        for i, v in pairs(data.raw["technology"]["logistic-robotics"]["effects"]) do
+            EnableRecipes(v.recipe)
+        end
     end
-  end
 
-  if settings.startup["enable-early-construction-robots"].value then
-    enableRecipes("roboport")
-    enableRecipes("construction-robot")
-    enableRecipes("passive-provider-chest")
-    enableRecipes("storage-chest")
-  end
-
-  if mods["recursive-blueprints"] then
-    enableRecipes("blueprint-deployer")
-    replaceIngredient("blueprint-deployer", {
-      {"iron-chest", 3},
-      {"electronic-circuit", 1}
-    })
-    for i, v in pairs(data.raw["technology"]["circuit-network"]["effects"]) do
-      enableRecipes(v.recipe)
+    if settings.startup["enable-early-construction-robots"].value then
+        EnableRecipes("roboport")
+        EnableRecipes("construction-robot")
+        EnableRecipes("passive-provider-chest")
+        EnableRecipes("storage-chest")
     end
-  end
 
-  if settings.startup["enable-early-logistic-system"].value then
-    for i, v in pairs(data.raw["technology"]["logistic-system"]["effects"]) do
-      enableRecipes(v.recipe)
+    if mods["recursive-blueprints"] then
+        EnableRecipes("blueprint-deployer")
+        ReplaceIngredient("blueprint-deployer", {
+            { "iron-chest",         3 },
+            { "electronic-circuit", 1 }
+        })
+        for i, v in pairs(data.raw["technology"]["circuit-network"]["effects"]) do
+            EnableRecipes(v.recipe)
+        end
     end
-  end
+
+    if settings.startup["enable-early-logistic-system"].value then
+        for i, v in pairs(data.raw["technology"]["logistic-system"]["effects"]) do
+            EnableRecipes(v.recipe)
+        end
+    end
 end
 
 function early_recipe_updates()
-  if settings.startup["disable-mod-recipes"].value then
-    return
-  end
-  robot_ingredient = {
-    {"iron-plate", 1},
-    {"iron-gear-wheel", 1},
-    {"electronic-circuit", 1},
-  }
-  chest_ingredient = {
-    {"iron-plate", 3},
-    {"electronic-circuit", 1},
-  }
-  roboport_ingredient = {
-    {"iron-plate", 25},
-    {"iron-gear-wheel", 10},
-    {"electronic-circuit", 10}
-  }
-  -- Changes cost of recipes
-  if settings.startup["enable-early-logistic-robots"].value then
-    replaceIngredient("logistic-robot", robot_ingredient)
-  end
-  if settings.startup["enable-early-construction-robots"].value then
-    replaceIngredient("construction-robot", robot_ingredient)
-  end
+    if settings.startup["disable-mod-recipes"].value then
+        return
+    end
+    robot_ingredient = {
+        { "iron-plate",         1 },
+        { "iron-gear-wheel",    1 },
+        { "electronic-circuit", 1 },
+    }
+    chest_ingredient = {
+        { "iron-plate",         3 },
+        { "electronic-circuit", 1 },
+    }
+    roboport_ingredient = {
+        { "iron-plate",         25 },
+        { "iron-gear-wheel",    10 },
+        { "electronic-circuit", 10 }
+    }
+    -- Changes cost of recipes
 
-  if (settings.startup["enable-early-logistic-robots"].value or settings.startup["enable-early-construction-robots"].value) then
-    replaceIngredient("passive-provider-chest", chest_ingredient)
-    replaceIngredient("storage-chest", chest_ingredient)
-    replaceIngredient("roboport", roboport_ingredient)
-  end
-  if settings.startup["enable-early-logistic-system"].value then
-    replaceIngredient("active-provider-chest", chest_ingredient)
-    replaceIngredient("requester-chest", chest_ingredient)
-    replaceIngredient("buffer-chest", chest_ingredient)
-  end
-
-  -- Makes electronic-circuits into basic-circuit-boards if bobelectronics is enabled
-  if mods["bobelectronics"] then
+    local generate_recycling_recipe
+    if mods["quality"] then
+        generate_recycling_recipe = require("__quality__.prototypes.recycling").generate_recycling_recipe
+    end
     if settings.startup["enable-early-logistic-robots"].value then
-      replaceIngredientItem("logistic-robot","electronic-circuit", "basic-circuit-board", 1)
+        ReplaceIngredient("logistic-robot", robot_ingredient)
+        if generate_recycling_recipe then
+            generate_recycling_recipe(data.raw.recipe["logistic-robot"])
+        end
     end
     if settings.startup["enable-early-construction-robots"].value then
-      replaceIngredientItem("construction-robot","electronic-circuit", "basic-circuit-board", 1)
+        ReplaceIngredient("construction-robot", robot_ingredient)
+        if mods["quality"] then
+            generate_recycling_recipe(data.raw.recipe["construction-robot"])
+        end
     end
 
     if (settings.startup["enable-early-logistic-robots"].value or settings.startup["enable-early-construction-robots"].value) then
-      replaceIngredientItem("passive-provider-chest","electronic-circuit", "basic-circuit-board", 1)
-      replaceIngredientItem("storage-chest","electronic-circuit", "basic-circuit-board", 1)
-      replaceIngredientItem("roboport","electronic-circuit", "basic-circuit-board", 10)
+        ReplaceIngredient("passive-provider-chest", chest_ingredient)
+        ReplaceIngredient("storage-chest", chest_ingredient)
+        ReplaceIngredient("roboport", roboport_ingredient)
+        if generate_recycling_recipe then
+            generate_recycling_recipe(data.raw.recipe["roboport"])
+            generate_recycling_recipe(data.raw.recipe["construction-robot"])
+            generate_recycling_recipe(data.raw.recipe["storage-chest"])
+        end
     end
     if settings.startup["enable-early-logistic-system"].value then
-      replaceIngredientItem("active-provider-chest","electronic-circuit", "basic-circuit-board", 1)
-      replaceIngredientItem("requester-chest","electronic-circuit", "basic-circuit-board", 1)
-      replaceIngredientItem("buffer-chest","electronic-circuit", "basic-circuit-board", 1)
+        ReplaceIngredient("active-provider-chest", chest_ingredient)
+        ReplaceIngredient("requester-chest", chest_ingredient)
+        ReplaceIngredient("buffer-chest", chest_ingredient)
+        if generate_recycling_recipe then
+            generate_recycling_recipe(data.raw.recipe ["active-provider-chest"])
+            generate_recycling_recipe(data.raw.recipe["requester-chest"])
+            generate_recycling_recipe(data.raw.recipe["buffer-chest"])
+        end
     end
-  end
+
+    -- Makes electronic-circuits into basic-circuit-boards if bobelectronics is enabled
+    if mods["bobelectronics"] then
+        if settings.startup["enable-early-logistic-robots"].value then
+            ReplaceIngredientItem("logistic-robot", "electronic-circuit", "basic-circuit-board", 1)
+        end
+        if settings.startup["enable-early-construction-robots"].value then
+            ReplaceIngredientItem("construction-robot", "electronic-circuit", "basic-circuit-board", 1)
+        end
+
+        if (settings.startup["enable-early-logistic-robots"].value or settings.startup["enable-early-construction-robots"].value) then
+            ReplaceIngredientItem("passive-provider-chest", "electronic-circuit", "basic-circuit-board", 1)
+            ReplaceIngredientItem("storage-chest", "electronic-circuit", "basic-circuit-board", 1)
+            ReplaceIngredientItem("roboport", "electronic-circuit", "basic-circuit-board", 10)
+        end
+        if settings.startup["enable-early-logistic-system"].value then
+            ReplaceIngredientItem("active-provider-chest", "electronic-circuit", "basic-circuit-board", 1)
+            ReplaceIngredientItem("requester-chest", "electronic-circuit", "basic-circuit-board", 1)
+            ReplaceIngredientItem("buffer-chest", "electronic-circuit", "basic-circuit-board", 1)
+        end
+    end
 end
 
 local enable_early_tech = function()
@@ -216,131 +245,136 @@ local enable_early_tech = function()
         data.raw.technology["worker-robots-storage-1"].prerequisites = { "early-worker-robots-storage" }
         data.raw.technology["worker-robots-speed-1"].prerequisites = { "early-worker-robots-speed" }
 
-    data:extend({
-      --early logistics slots
-      {
-        type = "technology",
-        name = "early-character-logistic-slots",
-        icon_size = 256, icon_mipmaps = 4,
-        icon = "__base__/graphics/technology/logistic-robotics.png",
-        effects =
-        {
-          {
-            type = "character-logistic-requests",
-            modifier = true
-          },
+        data:extend({
+            --early logistics slots
+            {
+                type = "technology",
+                name = "early-character-logistic-slots",
+                icon_size = 256,
+                icon_mipmaps = 4,
+                icon = "__base__/graphics/technology/logistic-robotics.png",
+                effects =
+                {
+                    {
+                        type = "character-logistic-requests",
+                        modifier = true
+                    },
 
-        },
-        prerequisites = {"logistics"},
-        unit =
-        {
-          count = 20,
-          ingredients =
-          {
-            {"automation-science-pack", 1},
-          },
-          time = 15
-        },
-        order = "c-k-d",
-      },
-      --early trash slots
-      {
-        type = "technology",
-        name = "early-character-logistic-trash-slots",
-        icon_size = 256, icon_mipmaps = 4,
-        icon = "__base__/graphics/technology/logistic-robotics.png",
-        effects =
-        {
-          {
-            type = "character-logistic-trash-slots",
-            modifier = 6
-          },
-        },
-        prerequisites = {"logistics"},
-        unit =
-        {
-          count = 20,
-          ingredients =
-          {
-            {"automation-science-pack", 1},
-          },
-          time = 15
-        },
-        order = "c-k-d",
-      },
-      --early worker speed
-      {
-        type = "technology",
-        name = "early-worker-robots-speed",
-        icon_size = 256, icon_mipmaps = 4,
-        icons = util.technology_icon_constant_movement_speed("__base__/graphics/technology/worker-robots-speed.png"),
-        effects =
-        {
-          {
-            type = "worker-robot-speed",
-            modifier = 0.3
-          },
+                },
+                prerequisites = { "logistics" },
+                unit =
+                {
+                    count = 20,
+                    ingredients =
+                    {
+                        { "automation-science-pack", 1 },
+                    },
+                    time = 15
+                },
+                order = "c-k-d",
+            },
+            --early trash slots
+            {
+                type = "technology",
+                name = "early-character-logistic-trash-slots",
+                icon_size = 256,
+                icon_mipmaps = 4,
+                icon = "__base__/graphics/technology/logistic-robotics.png",
+                effects =
+                {
+                    {
+                        type = "character-logistic-trash-slots",
+                        modifier = 6
+                    },
+                },
+                prerequisites = { "logistics" },
+                unit =
+                {
+                    count = 20,
+                    ingredients =
+                    {
+                        { "automation-science-pack", 1 },
+                    },
+                    time = 15
+                },
+                order = "c-k-d",
+            },
+            --early worker speed
+            {
+                type = "technology",
+                name = "early-worker-robots-speed",
+                icon_size = 256,
+                icon_mipmaps = 4,
+                icons = util.technology_icon_constant_movement_speed(
+                    "__base__/graphics/technology/worker-robots-speed.png"),
+                effects =
+                {
+                    {
+                        type = "worker-robot-speed",
+                        modifier = 0.3
+                    },
 
-        },
-        prerequisites = {"logistics"},
-        unit =
-        {
-          count = 100,
-          ingredients =
-          {
-            {"automation-science-pack", 1},
-            {"logistic-science-pack", 1},
-          },
-          time = 30
-        },
-        order = "c-k-d",
-      },
-      --early worker cargo capacity
-      {
-        type = "technology",
-        name = "early-worker-robots-storage",
-        icon_size = 256, icon_mipmaps = 4,
-        icons = util.technology_icon_constant_capacity("__base__/graphics/technology/worker-robots-storage.png"),
-        effects =
-        {
-          {
-            type = "worker-robot-storage",
-            modifier = 1
-          },
-        },
-        prerequisites = {"logistics"},
-        unit =
-        {
-          count = 100,
-          ingredients =
-          {
-            {"automation-science-pack", 1},
-            {"logistic-science-pack", 1},
-          },
-          time = 30
-        },
-        order = "c-k-d",
-      },
-    })
-  end
+                },
+                prerequisites = { "logistics" },
+                unit =
+                {
+                    count = 100,
+                    ingredients =
+                    {
+                        { "automation-science-pack", 1 },
+                        { "logistic-science-pack",   1 },
+                    },
+                    time = 30
+                },
+                order = "c-k-d",
+            },
+            --early worker cargo capacity
+            {
+                type = "technology",
+                name = "early-worker-robots-storage",
+                icon_size = 256,
+                icon_mipmaps = 4,
+                icons = util.technology_icon_constant_capacity("__base__/graphics/technology/worker-robots-storage.png"),
+                effects =
+                {
+                    {
+                        type = "worker-robot-storage",
+                        modifier = 1
+                    },
+                },
+                prerequisites = { "logistics" },
+                unit =
+                {
+                    count = 100,
+                    ingredients =
+                    {
+                        { "automation-science-pack", 1 },
+                        { "logistic-science-pack",   1 },
+                    },
+                    time = 30
+                },
+                order = "c-k-d",
+            },
+        })
+    end
 end
 
 function run_early_updates()
-  enable_early_recipes()
-  --early_recipe_updates()
-  enable_early_tech()
+    enable_early_recipes()
+    --early_recipe_updates()
+    enable_early_tech()
 end
 
 function run_later_updates()
-  early_energy_updates()
-  inserter_speed_updates()
-  
-  for i, v in pairs(data.raw["roboport"]) do
-    -- log(serpent.block(v))
-    if v.logistics_connection_distance ~= nil then
-      if v.logistics_radius > v.logistics_connection_distance then
-        v.logistics_connection_distance = v.logistics_radius
-      end
+    early_energy_updates()
+    inserter_speed_updates()
+
+    for i, v in pairs(data.raw["roboport"]) do
+        -- log(serpent.block(v))
+        if v.logistics_connection_distance ~= nil then
+            if v.logistics_radius > v.logistics_connection_distance then
+                v.logistics_connection_distance = v.logistics_radius
+            end
+        end
     end
-  end
 end

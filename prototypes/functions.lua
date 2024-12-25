@@ -8,7 +8,7 @@ function MultiplyEnergy(src, multiplier)
 end
 -- helper functions
 
-function tableContains(table, value)
+function TableContains(table, value)
   if table == nil then return false end
   for i = 1,#table do
     if (table[i] == value) then
@@ -19,7 +19,7 @@ function tableContains(table, value)
 end
 
 --Enable Recipes
-function enableRecipes(n)
+function EnableRecipes(n)
   local r = data.raw["recipe"][n]
   if r then
     if r.expensive == nil and r.normal == nil then
@@ -35,7 +35,7 @@ function enableRecipes(n)
   end
 end
 --replace all Ingredients
-function replaceIngredient(n, ing)
+function ReplaceIngredient(n, ing)
   local r = data.raw["recipe"][n]
   local ingredients = {}
   
@@ -57,7 +57,7 @@ function replaceIngredient(n, ing)
   end
 end
 --replace single ingredient
-function replaceIngredientItem_f(recipe, old, new, amount)
+function ReplaceIngredientItem_f(recipe, old, new, amount)
   local found = false
   if old then
     for i, component in pairs(recipe.ingredients) do
@@ -75,16 +75,16 @@ function replaceIngredientItem_f(recipe, old, new, amount)
   end
 end
 --replace ingredient items 2
-function replaceIngredientItem(recipe, old, new, amount)
+function ReplaceIngredientItem(recipe, old, new, amount)
   if type(recipe) == "string" then recipe = data.raw.recipe[recipe] end
   if not recipe then return end
   if recipe.ingredients then
-    replaceIngredientItem_f(recipe, old, new, amount)
+    ReplaceIngredientItem_f(recipe, old, new, amount)
   end
   if recipe.normal and recipe.normal.ingredients then
-    replaceIngredientItem_f(recipe.normal, old, new, amount)
+    ReplaceIngredientItem_f(recipe.normal, old, new, amount)
   end
   if recipe.expensive and recipe.expensive.ingredients then
-    replaceIngredientItem_f(recipe.expensive, old, new, amount)
+    ReplaceIngredientItem_f(recipe.expensive, old, new, amount)
   end
 end

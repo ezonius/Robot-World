@@ -1,14 +1,15 @@
 {
   "name": "robotworld-continued",
-  "version": "2.0.0",
+  "version": "2.0.14",
   "title": "Robot World Continued",
-  "author": "thinkong",
+  "author": "thinkong, modded by ezonius",
   "contact": "https://github.com/thinkong/Robot-World/issues",
   "factorio_version": "2.0",
   "homepage": "https://github.com/thinkong/Robot-World",
   "description": "Ability to customize the performance of your robots, such as speed, range, battery size, and more. Setting to use robots early. Setting to enable quick start mode. New robotics technologies. And more!",
   "dependencies": [
     "base >= 2.0.0",
+    "(?) quality",
     "? aai-containers",
     "? aai-industry >= 0.3.6",
     "? bobelectronics >= 0.18",
