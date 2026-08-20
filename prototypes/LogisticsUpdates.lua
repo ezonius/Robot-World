@@ -158,8 +158,8 @@ function early_recipe_updates()
     -- Changes cost of recipes
 
     local generate_recycling_recipe
-    if mods["quality"] then
-        generate_recycling_recipe = require("__quality__.prototypes.recycling").generate_recycling_recipe
+    if mods["recycler"] then
+        generate_recycling_recipe = require("__recycler__.recycling").generate_recycling_recipe
     end
     if settings.startup["enable-early-logistic-robots"].value then
         ReplaceIngredient("logistic-robot", robot_ingredient)
@@ -169,7 +169,7 @@ function early_recipe_updates()
     end
     if settings.startup["enable-early-construction-robots"].value then
         ReplaceIngredient("construction-robot", robot_ingredient)
-        if mods["quality"] then
+        if generate_recycling_recipe then
             generate_recycling_recipe(data.raw.recipe["construction-robot"])
         end
     end
