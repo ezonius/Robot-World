@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.17
+Date: 2026-09-12
+  Changes:
+    - Added tooltips to the Robot, Construction robot, and Logistics robot settings explaining that the general Robot settings apply to BOTH robot types and stack multiplicatively with the type-specific settings (final value = base × Robot × type). Clarified that "robot stack size" is the item stack size (robots per inventory slot), not carry capacity, and that health has no type-specific setting.
+---------------------------------------------------------------------------------------------------
 Version: 2.0.16
 Date: 2026-09-12
   Changes:
