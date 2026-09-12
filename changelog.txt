@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.15
+Date: 2026-09-11
+  Changes:
+    - Roboport logistics/construction radius value settings now show a minimum of -1 and are labeled "(-1 = vanilla)" so the old saved value of 1 can no longer silently shrink roboports to a tiny area when combined with the radius multiplier.
+---------------------------------------------------------------------------------------------------
 Version: 2.0.0
 Date: 2024-11-01
   Changes:

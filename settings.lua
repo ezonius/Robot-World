@@ -136,13 +136,15 @@ data:extend({
     type = "int-setting",
     name = "roboport-logistics-radius-value",
     setting_type = "startup",
-    default_value = -1
+    default_value = -1,
+    minimum_value = -1,
   },
   {
     type = "int-setting",
     name = "roboport-construction-radius-value",
     setting_type = "startup",
-    default_value = -1
+    default_value = -1,
+    minimum_value = -1,
   },
   {
     type = "bool-setting",
