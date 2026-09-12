@@ -206,6 +206,34 @@ data:extend({
   },
   {
     type = "bool-setting",
+    name = "enable-extra-robot-speed-research",
+    setting_type = "startup",
+    default_value = false
+  },
+  {
+    type = "int-setting",
+    name = "extra-robot-speed-research-count",
+    setting_type = "startup",
+    default_value = 5,
+    minimum_value = 1,
+    maximum_value = 50
+  },
+  {
+    type = "bool-setting",
+    name = "enable-extra-robot-storage-research",
+    setting_type = "startup",
+    default_value = false
+  },
+  {
+    type = "int-setting",
+    name = "extra-robot-storage-research-count",
+    setting_type = "startup",
+    default_value = 5,
+    minimum_value = 1,
+    maximum_value = 50
+  },
+  {
+    type = "bool-setting",
     name = "enable-quick-start",
     setting_type = "startup",
     default_value = false

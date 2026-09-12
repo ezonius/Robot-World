@@ -359,10 +359,80 @@ local enable_early_tech = function()
     end
 end
 
+local function deepcopy(orig)
+    if type(orig) ~= "table" then
+        return orig
+    end
+    local copy = {}
+    for k, v in pairs(orig) do
+        copy[deepcopy(k)] = deepcopy(v)
+    end
+    return copy
+end
+
+-- Adds optional duplicate researches of the pre-infinite worker robot research tiers.
+-- Each duplicate is a flat (dead-end) copy of one vanilla tier: same effect, cost,
+-- science packs and requirements, but never required by any other research.
+local add_extra_research_copies = function(prefix, enable_setting, count_setting)
+    if not settings.startup[enable_setting].value then
+        return
+    end
+    local amount = settings.startup[count_setting].value
+    -- collect all finite tiers of this chain (e.g. worker-robots-speed-1 .. -5)
+    local prefix_len = #prefix + 1
+    local tiers = {}
+    for name, tech in pairs(data.raw.technology) do
+        if name:sub(1, prefix_len) == prefix .. "-" then
+            local num = tonumber(name:sub(prefix_len + 1))
+            if num ~= nil and tech.max_level ~= "infinite" then
+                table.insert(tiers, { num = num, tech = tech })
+            end
+        end
+    end
+    table.sort(tiers, function(a, b) return a.num < b.num end)
+    if #tiers == 0 then
+        return
+    end
+    local techs = {}
+    for i = 1, amount do
+        local entry = tiers[((i - 1) % #tiers) + 1]
+        local ordinal = math.floor((i - 1) / #tiers) + 1
+        local tier_num = entry.num
+        local name = "extra-" .. prefix .. "-" .. tier_num
+        local localised_name = { "technology-name.extra-" .. prefix, tostring(tier_num) }
+        if ordinal > 1 then
+            name = name .. "-" .. ordinal
+            localised_name = { "technology-name.extra-" .. prefix .. "-repeat", tostring(tier_num),
+                tostring(ordinal) }
+        end
+        table.insert(techs, {
+            type = "technology",
+            name = name,
+            icons = deepcopy(entry.tech.icons),
+            localised_name = localised_name,
+            localised_description = { "technology-description." .. prefix },
+            effects = deepcopy(entry.tech.effects),
+            prerequisites = deepcopy(entry.tech.prerequisites),
+            unit = deepcopy(entry.tech.unit),
+            upgrade = entry.tech.upgrade,
+            order = entry.tech.order,
+        })
+    end
+    data:extend(techs)
+end
+
+local enable_extra_robo_research = function()
+    add_extra_research_copies("worker-robots-speed", "enable-extra-robot-speed-research",
+        "extra-robot-speed-research-count")
+    add_extra_research_copies("worker-robots-storage", "enable-extra-robot-storage-research",
+        "extra-robot-storage-research-count")
+end
+
 function run_early_updates()
     enable_early_recipes()
     --early_recipe_updates()
     enable_early_tech()
+    enable_extra_robo_research()
 end
 
 function run_later_updates()

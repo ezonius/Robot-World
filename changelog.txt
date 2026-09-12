@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.16
+Date: 2026-09-12
+  Changes:
+    - New settings to add optional "extra" worker robot speed and cargo size research (default off). When enabled, each pre-infinite tier (speed 1-5, cargo size 1-3) gets a researchable duplicate with identical effect, cost and requirements. The duplicates are never required to reach any other research.
+---------------------------------------------------------------------------------------------------
 Version: 2.0.15
 Date: 2026-09-11
   Changes:
