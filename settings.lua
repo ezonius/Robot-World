@@ -292,4 +292,36 @@ data:extend({
     setting_type = "startup",
     default_value = false,
   },
+
+  -- === Invisible robots ===
+  {
+    type = "bool-setting",
+    name = "invisible-construction-robots",
+    order = "i[invisible-robots]-a[construction-robots]",
+    setting_type = "startup",
+    default_value = false
+  },
+  {
+    type = "bool-setting",
+    name = "invisible-logistic-robots",
+    order = "i[invisible-robots]-b[logistic-robots]",
+    setting_type = "startup",
+    default_value = false
+  },
+
+  -- === Non-lootable robots ===
+  {
+    type = "bool-setting",
+    name = "non-lootable-construction-robots",
+    order = "j[non-lootable]-a[construction-robots]",
+    setting_type = "runtime-global",
+    default_value = false
+  },
+  {
+    type = "bool-setting",
+    name = "non-lootable-logistic-robots",
+    order = "j[non-lootable]-b[logistic-robots]",
+    setting_type = "runtime-global",
+    default_value = false
+  },
 })

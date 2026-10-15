@@ -1,4 +1,24 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.21
+Date: 2026-09-25
+  Bugfixes:
+    - Compat for [planet-muluna]: the charging-rate multiplier now also scales Muluna's burner/vacuum roboport refueler (the assembling-machine part that burns roboport propellant to refill the roboport's buffer). Previously the refueler kept the vanilla burn rate, so with a high charging-rate multiplier the roboport buffer drained faster than it could be refilled. Respects the "only modify vanilla roboports" setting (skips Muluna roboports when enabled).
+---------------------------------------------------------------------------------------------------
+Version: 2.0.20
+Date: 2026-09-12
+  Bugfixes:
+    - Fixed a non-recoverable error when loading a save with the mod enabled: on_load() tried to use the `game` object, which Factorio keeps unavailable inside on_load. The non-lootable robot flag sync is now deferred to the first tick after a load (and only runs when a non-lootable toggle is actually on, so normal loads pay nothing). The flags themselves persist in the save, so this was only a safety re-sync.
+---------------------------------------------------------------------------------------------------
+Version: 2.0.19
+Date: 2026-09-12
+  Changes:
+    - New runtime settings to make [color=orange]construction robots[/color] and [color=green]logistics robots[/color] non-lootable: they can no longer be picked up (mined) by right-click dragging / holding right click over the map, preventing accidental looting. Uses the per-entity [font=default-bold]minable_flag[/font] runtime flag, so it applies immediately to all existing and newly spawned robots - no restart needed.
+---------------------------------------------------------------------------------------------------
+Version: 2.0.18
+Date: 2026-09-12
+  Changes:
+    - New startup settings to make [color=orange]construction robots[/color] and [color=green]logistics robots[/color] invisible (inspired by Bilka2's invisible-robots mod): removes their sprites, shadows, lights, smoke/sparks and carried-cargo rendering. Robots remain fully functional. Takes effect after a restart because robot graphics are baked into the prototypes at load time (a runtime shortcut toggle is not possible).
+---------------------------------------------------------------------------------------------------
 Version: 2.0.17
 Date: 2026-09-12
   Changes:

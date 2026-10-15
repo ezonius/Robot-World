@@ -97,6 +97,34 @@ local early_energy_updates = function()
     end
 end
 
+-- Compat for Planet Muluna (https://mods.factorio.com/mod/planet-muluna)
+-- Muluna's burner/vacuum roboport is split into two entities in its data-final-fixes:
+--   - the roboport itself ("<name>-roboport"), with input_flow_limit forced to "0W"
+--   - a refueler assembling-machine ("<name>") that burns roboport propellant fluid to
+--     refill the roboport's internal buffer at the original input_flow_limit rate.
+-- Our generic roboport scaling cannot see the refueler (it is an assembling-machine), and the
+-- roboport's input_flow_limit is already "0W" when we scale it, so the charging-rate multiplier
+-- would otherwise have no effect on how fast the buffer refills. Scale the refueler's
+-- energy_usage (its propellant burn rate) by the same charging-rate multiplier.
+local muluna_refueler_updates = function()
+    if not mods["planet-muluna"] then
+        return
+    end
+    local charge_mult = settings.startup["roboport-charging-rate-multiplier"].value
+    if charge_mult == 1 then
+        return
+    end
+    for i, v in pairs(data.raw["assembling-machine"]) do
+        local energy_source = v.energy_source
+        if energy_source ~= nil and energy_source.fuel_categories ~= nil and
+            TableContains(energy_source.fuel_categories, "muluna-roboport-propellant") then
+            if not settings.startup["only-modify-vanilla-roboport"].value then
+                v.energy_usage = MultiplyEnergy(v.energy_usage, charge_mult)
+            end
+        end
+    end
+end
+
 local inserter_speed_updates = function()
     for i, v in pairs(data.raw["inserter"]) do
         v.extension_speed = v.extension_speed * settings.startup["inserter-speed-multiplier"].value
@@ -428,6 +456,48 @@ local enable_extra_robo_research = function()
         "extra-robot-storage-research-count")
 end
 
+-- Makes robots invisible by removing their graphics. Based on Bilka2's invisible-robots mod.
+-- Robot sprites are baked into the prototypes at load time, so this can only be applied here
+-- in the data stage - the settings are startup settings and take effect after a game restart.
+-- Applied in data-final-fixes so it also covers robots added by other mods.
+local robot_invisibility_updates = function()
+    if settings.startup["invisible-logistic-robots"].value then
+        for _, robot in pairs(data.raw["logistic-robot"]) do
+            -- skip hidden-flag helper robots, same as early_energy_updates
+            if not TableContains(robot.flags, "hidden") then
+                robot.shadow_in_motion = nil
+                robot.in_motion = nil
+                robot.shadow_idle = nil
+                robot.idle = nil
+                robot.idle_with_cargo = nil
+                robot.in_motion_with_cargo = nil
+                robot.shadow_idle_with_cargo = nil
+                robot.shadow_in_motion_with_cargo = nil
+                robot.draw_cargo = false
+                robot.water_reflection = nil
+            end
+        end
+    end
+
+    if settings.startup["invisible-construction-robots"].value then
+        for _, robot in pairs(data.raw["construction-robot"]) do
+            if not TableContains(robot.flags, "hidden") then
+                robot.shadow_in_motion = nil
+                robot.in_motion = nil
+                robot.shadow_idle = nil
+                robot.idle = nil
+                robot.shadow_working = nil
+                robot.working = nil
+                robot.smoke = nil
+                robot.sparks = nil
+                robot.working_light = nil
+                robot.draw_cargo = false
+                robot.water_reflection = nil
+            end
+        end
+    end
+end
+
 function run_early_updates()
     enable_early_recipes()
     --early_recipe_updates()
@@ -437,7 +507,9 @@ end
 
 function run_later_updates()
     early_energy_updates()
+    muluna_refueler_updates()
     inserter_speed_updates()
+    robot_invisibility_updates()
 
     for i, v in pairs(data.raw["roboport"]) do
         -- log(serpent.block(v))

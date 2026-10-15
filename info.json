@@ -1,6 +1,6 @@
 {
   "name": "robotworld-continued",
-  "version": "2.0.17",
+  "version": "2.0.21",
   "title": "Robot World Continued",
   "author": "thinkong, modded by ezonius",
   "contact": "https://github.com/thinkong/Robot-World/issues",
@@ -17,6 +17,7 @@
     "(?) 248k >= 0.5.2",
     "(?) nullius >= 1.5.0",
     "(?) space-exploration >= 0.6.123",
-    "(?) Krastorio2 >= 1.3.23"
+    "(?) Krastorio2 >= 1.3.23",
+    "(?) planet-muluna"
   ]
 }
